@@ -16,6 +16,8 @@ export class mainPage extends Component {
       showData: false,
       Alert: "",
       show: false,
+      selectedResult: [],
+      key:''
     };
   }
 
@@ -41,17 +43,21 @@ console.log("here here, ", retrivedURL.data);
       searchResults: retrivedURL.data,
       showData: true,
     });
+    console.log(this.state.searchResults);
   };
 
   showModal = async (key) => {
-    let results = this.state.searchResults.find((result) => {
-      if (key === this.state.searchResults.key) {
+    // let targetKey = event.target.
+    let results = this.state.searchResults.filter((result) => {
+      if (Number(result.key) === key) {
         return result;
       }
+      console.log(key);
     });
+    console.log(results);
 
     await this.setState({
-      searchResults: results,
+     selectedResult: results,
       show: true,
     });
   };
@@ -65,6 +71,8 @@ console.log("here here, ", retrivedURL.data);
   };
 
   render() {
+    console.log(this.state.searchResults);
+
     return (
       <div>
         
@@ -92,9 +100,9 @@ console.log("here here, ", retrivedURL.data);
                 key={i} 
                 Thumbnail={item.thumbnail}
                 title={item.modelName}
+                key={item.key}
                 showData={this.showModal}
-
-                 />;
+                />;
               })}
           </div>
 
