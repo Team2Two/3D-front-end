@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, Modal, Button } from "react-bootstrap/";
+import { Form, Modal, Button,Carousel } from "react-bootstrap/";
+import Carso from "./carso";
 import axios from "axios";
 import OneResult from "./oneResult";
 // import LoginButton from './loginButton'
@@ -43,7 +44,7 @@ console.log("here here, ", retrivedURL.data);
   };
 
   showModal = async (id) => {
-    let results = this.state.searchResults.find((result) => {
+    let results = this.state.searchResults.filter((result) => {
       if (result._id === id) {
         return result;
       }
@@ -67,7 +68,7 @@ console.log("here here, ", retrivedURL.data);
     return (
       <div>
         
-          {/* <LoginButton/> */}
+          <Carso/>
         
           <Form onSubmit={this.getData}>                                                       
             <Form.Control

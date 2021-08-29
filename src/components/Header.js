@@ -14,6 +14,7 @@ class Header extends React.Component {
     const { user, isAuthenticated } = this.props.auth0;
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <div className="TV">
         <Link to="/">
           {" "}
           <img
@@ -46,7 +47,7 @@ class Header extends React.Component {
         className= "userImg"
             src= {user.picture}
             alt="logo"
-            width="57px"
+            width="49px"
           />
 
 
@@ -54,10 +55,10 @@ class Header extends React.Component {
           className= "userImg"
           src= "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"
           alt="logo"
-          width="60px"
+          width="50px"
         />}
 
-        
+</div>
       </Navbar>
     );
   }

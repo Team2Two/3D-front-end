@@ -17,6 +17,7 @@ form {
   width: 70%;
   margin: 5rem auto;
   display: flex;
+  justify-content: space-between;
   padding: 0.5rem;
   background-color: white;
   border-radius: 5px;
@@ -28,14 +29,21 @@ form {
 .form-control {
   height: 20px;
   border-style: none;
+  width: 90%;
 }
 
 .form-control:focus {
   height: 20px;
   border-style: none;
   box-shadow: none;
+  background-color: transparent;
 }
 
+
+.form-control: {
+  
+  background-color: transparent;
+}
 /* .btn {
   padding: 0.5rem 2rem;
 } */
@@ -45,6 +53,8 @@ form {
 
  /* border: solid tomato; */
  width: 70%;
+ height: 70vh;
+ overflow: auto;
   margin: 3rem auto;
 display: flex;
 flex-wrap: wrap;
