@@ -18,13 +18,13 @@ class Header extends React.Component {
         <Link to="/">
           {" "}
           <img
-            src="https://cubecontrols.com/wp-content/uploads/2019/01/Cube-Controls-Favicon_new.png"
+            src="https://www.thecube.net/images/cube_logo.png"
             alt="logo"
             width="100px"
           />
         </Link>
 
-        <Navbar.Brand><span style={{color: "#0086FF", fontSize: "2pc", fontWeight: "bolder"}}>3</span>Data</Navbar.Brand>
+        <Navbar.Brand><span style={{color: "white", fontSize: "2pc", fontWeight: "bolder"}}>Cube</span></Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
