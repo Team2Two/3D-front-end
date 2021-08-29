@@ -1,44 +1,45 @@
 import React, { Component } from "react";
 import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import OneCollection from "./oneCollection";
+// import OneCollection from "./oneCollection";
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      collections: [],
-      showData: false,
-      Alert: "",
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     email: "",
+  //     collections: [],
+  //     showData: false,
+  //     Alert: "",
+  //   };
+  // }
 
-  getData = async () => {
-
-
-    const { user, isAuthenticated } = this.props.auth0;
-
-    await this.setState({
-      email: user.email,
-    });
+  // getData = async () => {
 
 
-    let requestURL = `##`;
+  //   // const { user, isAuthenticated } = this.props.auth0;
 
-    let retrivedURL = await axios.get(requestURL);
+  //   // await this.setState({
+  //   //   email: user.email,
+  //   // });
 
-    this.setState({
-      collections: retrivedURL.data,
-      showData: true,
-    });
-  };
+
+  //   let requestURL = ``;
+
+  //   let retrivedURL = await axios.get(requestURL);
+
+  //   this.setState({
+  //     collections: retrivedURL.data,
+  //     showData: true,
+  //   });
+  // };
 
   render() {
-    const { user, isAuthenticated } = this.props.auth0;
+    const { user, isAuthenticated  } = this.props.auth0;
 
     return (
      
+      
       isAuthenticated && (
         <div>
           <img src={user.picture} alt={user.name} />
@@ -47,7 +48,7 @@ class Profile extends Component {
         </div>
       )
           
-      
+     
       
       // <div>
           //   {this.state.showData &&
@@ -55,11 +56,6 @@ class Profile extends Component {
           //       return <OneCollection key={i} collName={item} />;
           //     })}
           // </div>
-
-
-         
-
-
         
       
     );

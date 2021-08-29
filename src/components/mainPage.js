@@ -3,6 +3,8 @@ import { Form, Modal, Button } from "react-bootstrap/";
 import axios from "axios";
 import OneResult from "./oneResult";
 // import LoginButton from './loginButton'
+import "./CSS/mainPage.css";
+
 
 export class mainPage extends Component {
   constructor(props) {
@@ -17,14 +19,14 @@ export class mainPage extends Component {
     };
   }
 
-  getLocation = async (e) => {
+  getData = async (e) => {
     e.preventDefault();
 
-    const { user, isAuthenticated } = this.props.auth0;
+    // const { user, isAuthenticated } = this.props.auth0;
 
-    await this.setState({
-      email: user.email,
-    });
+    // await this.setState({
+    //   email: user.email,
+    // });
 
     await this.setState({
       searchInput: e.target.search.value,
@@ -64,9 +66,10 @@ export class mainPage extends Component {
   render() {
     return (
       <div>
+        <div className="cover">
           {/* <LoginButton/> */}
-        <>
-          <Form>
+        
+          <Form >                                                       
             <Form.Control
               size="lg"
               type="text"
@@ -77,12 +80,18 @@ export class mainPage extends Component {
               Search
             </Button>
           </Form>
+          
+          </div>
           <div className="results">
             {this.state.showData &&
               this.state.searchResults.map((item, i) => {
                 return <OneResult key={i} Thumbnail={item.thumbnail} />;
               })}
           </div>
+
+
+
+
 
           <Modal show={this.state.show} onHide={this.handleClose}>
             <Modal.Title>{this.state.searchInput}</Modal.Title>
@@ -91,7 +100,7 @@ export class mainPage extends Component {
               Close
             </Button>
           </Modal>
-        </>
+        
       </div>
     );
   }

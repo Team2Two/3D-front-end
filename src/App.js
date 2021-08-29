@@ -6,11 +6,15 @@ import Footer from "./components/Footer";
 import MainPage from "./components/mainPage";
 import Profile from "./components/profile";
 import AboutUs from "./components/aboutus";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+
+
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <div className="app">
+      <Router>
         <Header/>
         <Switch>
           <Route exact path="/">
@@ -19,7 +23,7 @@ class App extends React.Component {
           </Route>
 
           <Route exact path="/profile">
-            <Profile />
+            <Profile/>
           </Route>
          
           <Route exact path="/aboutus">
@@ -29,7 +33,8 @@ class App extends React.Component {
 
         </Switch>
         <Footer/>
-      </BrowserRouter>
+      </Router>
+      </div>
     );
   }
 }

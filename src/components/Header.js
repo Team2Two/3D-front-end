@@ -1,56 +1,63 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from 'react-bootstrap/Navbar';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap/";
 import { Link } from "react-router-dom";
 // import './Header.css';
-import LoginButton from './login'
-import LogoutButton from './logout'
-import { withAuth0 } from '@auth0/auth0-react';
-import  DropdownMenu from   "reactstrap"
+import LoginButton from "./loginButton";
+import LogoutButton from "./logout";
+import { withAuth0 } from "@auth0/auth0-react";
+import "./CSS/Header.css"
+// import  DropdownMenu from   "reactstrap"
 
 class Header extends React.Component {
-
   render() {
-    const {  isAuthenticated  } = this.props.auth0;
-    return(
+    const { user, isAuthenticated } = this.props.auth0;
+    return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Link to="/"> <img src="https://cdn.logo.com/hotlink-ok/logo-social.png"  width="100px"/></Link>
+        <Link to="/">
+          {" "}
+          <img
+            src="https://cubecontrols.com/wp-content/uploads/2019/01/Cube-Controls-Favicon_new.png"
+            alt="logo"
+            width="100px"
+          />
+        </Link>
 
-        <Navbar.Brand>3DATA</Navbar.Brand>
+        <Navbar.Brand><span style={{color: "#911F27", fontSize: "2pc", fontWeight: "bolder"}}>3D</span>ata</Navbar.Brand>
 
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto" >
+            <Link style={{textDecoration: "none", color: "white", marginTop: "0.5rem"}} to="/">Home</Link>
 
-{/* 
-        <UncontrolledDropdown nav>
-                                        <DropdownToggle nav>
-                                            <i className="ni ni-collection d-lg-none mr-1" />
-                                            <span style={{ fontSize: "1.5pc" }} className="nav-link-inner--text">Menu</span>
-                                        </DropdownToggle>
-                                        <DropdownMenu>
-
-                                            <DropdownItem to="/profile-page" tag={Link}>
-                                                Profile
-                                            </DropdownItem>
-                                            <DropdownItem to="/landing-page" tag={Link}>
-                                                Portfolio
-                                            </DropdownItem>
-                                            {/* <DropdownItem to="/login-page" tag={Link}>
-                        Login
-                      </DropdownItem> */}
-                                            {/* <DropdownItem to="/register-page" tag={Link}>
-                        Register
-                      </DropdownItem> */}
-                                        </DropdownMenu>
-                                    </UncontrolledDropdown> */}
+            <NavDropdown   title="Menu" id="collasible-nav-dropdown">
+            <Link style={{textDecoration: "none", color: "black", marginLeft: "1rem"}} to="/profile">Profile</Link><br></br>
+            <Link style={{textDecoration: "none", color: "black", marginLeft: "1rem"}} to="/aboutus">About Us</Link>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
 
 
-       
+
+
+        {isAuthenticated ? <LogoutButton /> : <LoginButton/>}
+        {isAuthenticated ?  
+        <img
+        className= "userImg"
+            src= {user.picture}
+            alt="logo"
+            width="57px"
+          />
+
+
+          : <img
+          className= "userImg"
+          src= "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"
+          alt="logo"
+          width="60px"
+        />}
+
         
-
-
-        <Link to="/">Home</Link>
-        <Link to="/profile">Profile</Link>
-        {(isAuthenticated) ? <LogoutButton/>:<LoginButton/>}
-        {/* TODO: if the user is logged in, render the `LogoutButton` - if the user is logged out, render the `LoginButton` */}
       </Navbar>
     );
   }
