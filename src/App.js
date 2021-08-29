@@ -1,6 +1,8 @@
 import React from "react";
 import { withAuth0 } from "@auth0/auth0-react";
-import Login from "./components/login";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import MainPage from "./components/mainPage";
 import Profile from "./components/profile";
 import AboutUs from "./components/aboutus";
@@ -9,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        {/* <Header/> */}
+        <Header/>
         <Switch>
           <Route exact path="/">
             {" "}
@@ -26,7 +28,7 @@ class App extends React.Component {
 
 
         </Switch>
-        {/* <Footer/> */}
+        <Footer/>
       </BrowserRouter>
     );
   }
