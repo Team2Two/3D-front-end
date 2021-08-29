@@ -22,16 +22,17 @@ export class mainPage extends Component {
   getData = async (e) => {
     e.preventDefault();
 
-    this.setState({
-      searchResults: [],
+    // this.setState({
+    //   searchResults: [],
       
-    });
+    // });
 
     await this.setState({
       searchInput: e.target.search.value,
     });
     // http://localhost:4000/models?title=car
-    let requestURL = `http://localhost:4000/models?title=${this.state.searchInput}`;
+    let requestURL = `http://localhost:3001/models?title=${this.state.searchInput}`;
+
 
     let retrivedURL = await axios.get(requestURL);
 console.log("here here, ", retrivedURL.data);
@@ -42,9 +43,9 @@ console.log("here here, ", retrivedURL.data);
     });
   };
 
-  showModal = async (id) => {
+  showModal = async (key) => {
     let results = this.state.searchResults.find((result) => {
-      if (result._id === id) {
+      if (key === this.state.searchResults.key) {
         return result;
       }
     });
@@ -91,6 +92,7 @@ console.log("here here, ", retrivedURL.data);
                 key={i} 
                 Thumbnail={item.thumbnail}
                 title={item.modelName}
+                showData={this.showModal}
 
                  />;
               })}
