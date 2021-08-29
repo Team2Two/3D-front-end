@@ -46,13 +46,13 @@ console.log("here here, ", retrivedURL.data);
     console.log(this.state.searchResults);
   };
 
-  showModal = async (key) => {
+  showModal = async (title) => {
     // let targetKey = event.target.
-    let results = this.state.searchResults.filter((result) => {
-      if (Number(result.key) === key) {
+    let results = this.state.searchResults.find((result) => {
+      if (result.modelName === title) {
         return result;
       }
-      console.log(key);
+      // console.log(key);
     });
     console.log(results);
 
@@ -60,6 +60,7 @@ console.log("here here, ", retrivedURL.data);
      selectedResult: results,
       show: true,
     });
+    console.log(this.state.selectedResults);
   };
 
   ///////////////////////////////////////////
@@ -100,7 +101,6 @@ console.log("here here, ", retrivedURL.data);
                 key={i} 
                 Thumbnail={item.thumbnail}
                 title={item.modelName}
-                key={item.key}
                 showData={this.showModal}
                 />;
               })}
@@ -111,8 +111,9 @@ console.log("here here, ", retrivedURL.data);
 
 
           <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Title>{this.state.searchInput}</Modal.Title>
-            <iframe src={this.state.searchResults.model} title="lol"></iframe>
+            <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
+
+            <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
