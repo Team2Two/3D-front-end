@@ -22,19 +22,19 @@ export class mainPage extends Component {
   getData = async (e) => {
     e.preventDefault();
 
-    // const { user, isAuthenticated } = this.props.auth0;
-
-    // await this.setState({
-    //   email: user.email,
-    // });
+    this.setState({
+      searchResults: [],
+      
+    });
 
     await this.setState({
       searchInput: e.target.search.value,
     });
-
-    let requestURL = ``;
+    // http://localhost:4000/models?title=car
+    let requestURL = `http://localhost:4000/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
+console.log("here here, ", retrivedURL.data);
 
     this.setState({
       searchResults: retrivedURL.data,
@@ -66,10 +66,10 @@ export class mainPage extends Component {
   render() {
     return (
       <div>
-        <div className="cover">
+        
           {/* <LoginButton/> */}
         
-          <Form >                                                       
+          <Form onSubmit={this.getData}>                                                       
             <Form.Control
               size="lg"
               type="text"
@@ -81,11 +81,18 @@ export class mainPage extends Component {
             </Button>
           </Form>
           
-          </div>
+          
+
+
           <div className="results">
             {this.state.showData &&
               this.state.searchResults.map((item, i) => {
-                return <OneResult key={i} Thumbnail={item.thumbnail} />;
+                return <OneResult 
+                key={i} 
+                Thumbnail={item.thumbnail}
+                title={item.modelName}
+
+                 />;
               })}
           </div>
 

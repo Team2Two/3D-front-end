@@ -23,7 +23,7 @@ class Header extends React.Component {
           />
         </Link>
 
-        <Navbar.Brand><span style={{color: "#911F27", fontSize: "2pc", fontWeight: "bolder"}}>3D</span>ata</Navbar.Brand>
+        <Navbar.Brand><span style={{color: "#0086FF", fontSize: "2pc", fontWeight: "bolder"}}>3</span>Data</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
