@@ -1,15 +1,16 @@
 
-body  {
 
-/* height: 1000px; */
-  /* border: tomato solid; */
+
+
+.app {
+height: 100vh;
+/* border: solid green; */
 
 }
 
 
-.app {
-  /* height: 1000px; */
-/* border: tomato solid; */
+.footer {
 
+/* margin-top: 39.7vh; */
 
 }

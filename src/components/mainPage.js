@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, Modal, Button } from "react-bootstrap/";
+import { Form, Modal, Button,Carousel } from "react-bootstrap/";
+import Carso from "./carso";
 import axios from "axios";
 import OneResult from "./oneResult";
 // import LoginButton from './loginButton'
@@ -22,19 +23,19 @@ export class mainPage extends Component {
   getData = async (e) => {
     e.preventDefault();
 
-    // const { user, isAuthenticated } = this.props.auth0;
-
-    // await this.setState({
-    //   email: user.email,
-    // });
+    this.setState({
+      searchResults: [],
+      
+    });
 
     await this.setState({
       searchInput: e.target.search.value,
     });
-
-    let requestURL = ``;
+    // http://localhost:4000/models?title=car
+    let requestURL = `http://localhost:4000/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
+console.log("here here, ", retrivedURL.data);
 
     this.setState({
       searchResults: retrivedURL.data,
@@ -43,7 +44,7 @@ export class mainPage extends Component {
   };
 
   showModal = async (id) => {
-    let results = this.state.searchResults.find((result) => {
+    let results = this.state.searchResults.filter((result) => {
       if (result._id === id) {
         return result;
       }
@@ -66,10 +67,10 @@ export class mainPage extends Component {
   render() {
     return (
       <div>
-        <div className="cover">
-          {/* <LoginButton/> */}
         
-          <Form >                                                       
+          <Carso/>
+        
+          <Form onSubmit={this.getData}>                                                       
             <Form.Control
               size="lg"
               type="text"
@@ -81,11 +82,18 @@ export class mainPage extends Component {
             </Button>
           </Form>
           
-          </div>
+          
+
+
           <div className="results">
             {this.state.showData &&
               this.state.searchResults.map((item, i) => {
-                return <OneResult key={i} Thumbnail={item.thumbnail} />;
+                return <OneResult 
+                key={i} 
+                Thumbnail={item.thumbnail}
+                title={item.modelName}
+
+                 />;
               })}
           </div>
 

@@ -9,28 +9,20 @@ class Footer extends React.Component {
     return (
       <div className="footer">
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Link to="/">
-            {" "}
-            <img
-            alt= "img"
-              src="https://cubecontrols.com/wp-content/uploads/2019/01/Cube-Controls-Favicon_new.png"
-              width="100px"
-            />
-          </Link>
+          <div className="TV FTV">
+            
+        <Link to="/">
+          {" "}
+          <img
+            src="https://www.thecube.net/images/cube_logo.png"
+            alt="logo"
+            width="100px"
+          />
+        </Link>
 
-          <Navbar.Brand>
-            <span
-              style={{
-                color: "#911F27",
-                fontSize: "2pc",
-                fontWeight: "bolder",
-              }}
-            >
-              3D
-            </span>
-            ata
-          </Navbar.Brand>
-          <span style={{ zIndex: "2", color: "white" }}>
+        <Navbar.Brand><span style={{color: "white", fontSize: "2pc", fontWeight: "bolder"}}>Cube</span></Navbar.Brand>
+        
+          <span style={{ zIndex: "2", color: "white", marginTop: "0.7rem", marginLeft: "5rem" }}>
             &copy; All Rights Reserved
           </span>
 
@@ -57,6 +49,7 @@ class Footer extends React.Component {
               </Link>
             </li>
           </ul>
+          </div>
         </Navbar>
       </div>
     );

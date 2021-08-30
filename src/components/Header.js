@@ -14,16 +14,17 @@ class Header extends React.Component {
     const { user, isAuthenticated } = this.props.auth0;
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <div className="TV">
         <Link to="/">
           {" "}
           <img
-            src="https://cubecontrols.com/wp-content/uploads/2019/01/Cube-Controls-Favicon_new.png"
+            src="https://www.thecube.net/images/cube_logo.png"
             alt="logo"
             width="100px"
           />
         </Link>
 
-        <Navbar.Brand><span style={{color: "#911F27", fontSize: "2pc", fontWeight: "bolder"}}>3D</span>ata</Navbar.Brand>
+        <Navbar.Brand><span style={{color: "white", fontSize: "2pc", fontWeight: "bolder", userSelect: "none"}}>Cube</span></Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -46,7 +47,7 @@ class Header extends React.Component {
         className= "userImg"
             src= {user.picture}
             alt="logo"
-            width="57px"
+            width="49px"
           />
 
 
@@ -54,10 +55,10 @@ class Header extends React.Component {
           className= "userImg"
           src= "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"
           alt="logo"
-          width="60px"
+          width="50px"
         />}
 
-        
+</div>
       </Navbar>
     );
   }

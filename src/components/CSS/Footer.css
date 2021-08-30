@@ -1,7 +1,20 @@
 .footer {
 
-width: 100%;
-position: absolute;
-bottom: 0vh;
 
 }
+
+
+.FTV   {
+
+    
+    
+    }
+
+.FTV  ul li {
+
+float: right;
+margin-left: 1rem;
+margin-top: 1.9rem;
+
+}
+

@@ -1,8 +1,17 @@
 .userImg {
 
-margin-right: 1rem;
+/* margin-right: 1rem; */
 filter: invert(1);
 border-radius: 65px;
+}
+
+.TV {
+
+/* border: solid tomato; */
+width: 80%;
+margin: 0 auto;
+display: flex;
+align-items: center;
 }
 
 .btn {
@@ -10,3 +19,37 @@ border-radius: 65px;
 padding: 0.5rem 1rem;
 
 }
+
+
+
+.navbar{
+
+background-color: white;
+/* border: tomato solid; */
+}
+
+
+.me-auto {
+
+/* border: tomato solid; */
+margin-top: 0.8rem;
+margin-left: 1rem;
+
+}
+
+.carousel span {
+
+z-index: 10;
+font-weight: bolder;
+user-select: none;
+
+} 
+
+
+.carousel-indicators button {
+
+color: transparent;
+
+}
+
+
