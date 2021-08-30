@@ -38,8 +38,7 @@ export class AddCollection extends Component {
                   <Form.Select aria-label="Choose Collection" name='collection' >
                    
                     <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                  
                     
                     
                   </Form.Select>

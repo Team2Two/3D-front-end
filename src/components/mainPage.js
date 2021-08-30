@@ -27,6 +27,7 @@ export class mainPage extends Component {
       show: false,
       selectedResult: [],
       key: "",
+      collectionData:[]
     };
   }
   /////////////////////////////////////////////////////////////////////////////////
@@ -45,13 +46,13 @@ export class mainPage extends Component {
     let requestURL = `http://localhost:3001/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
-    console.log("here here, ", retrivedURL.data);
+    // console.log("here here, ", retrivedURL.data);
 
     this.setState({
       searchResults: retrivedURL.data,
       showData: true,
     });
-    console.log(this.state.searchResults);
+    // console.log(this.state.searchResults);
   };
   /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -68,13 +69,13 @@ export class mainPage extends Component {
       }
       // console.log(key);
     });
-    console.log(results);
+    // console.log(results);
 
     await this.setState({
       selectedResult: results,
       show: true,
     });
-    console.log(this.state.selectedResults);
+    // console.log(this.state.selectedResults);
   };
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -90,8 +91,8 @@ export class mainPage extends Component {
       event.preventDefault();
       
       const user = this.props.auth0;
-      console.log(user);
-      console.log('hello');
+      // console.log(user);
+      // console.log('hello');
       
       let modelInfo = {
           title: this.state.selectedResult.modelName,
@@ -101,12 +102,26 @@ export class mainPage extends Component {
           
       }
     
-      console.log(event.target.collection.value);
-      console.log(modelInfo);
+      // console.log(event.target.collection.value);
       // console.log(modelInfo);
-      let collectionData = await axios.get(`${process.env.REACT_APP_SERVER}/getcollection?email=${modelInfo.email}`)
-      
-       let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
+      // console.log(modelInfo);
+      let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+      console.log('jhjkjhjh')
+        this.setState({
+          collectionData: collectionData.data,
+       });
+       console.log(this.state.collectionData)
+       let nameofcolectiom=[]
+       let results = this.state.collectionData.map((result) => {
+       
+       if(!nameofcolectiom.includes(result.collectionOfModels)) {nameofcolectiom.push(result.collectionOfModels)}
+       return(nameofcolectiom)
+      });
+      console.log(nameofcolectiom);
+      console.log(results)
+     
+  
+      //  let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
        
       //   this.setState({
       //    books: bookData.data,
@@ -115,7 +130,7 @@ export class mainPage extends Component {
   
 
   render() {
-    console.log(this.state.searchResults);
+    // console.log(this.state.searchResults);
     const { user, isAuthenticated  } = this.props.auth0;
 
     return (
