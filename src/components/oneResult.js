@@ -7,7 +7,8 @@ class OneResult extends React.Component {
     return (
       <>
         <Card style={{ width: "25rem" }} onClick>
-          <Card.Img variant="top" src={this.props.Thumbnail} />
+          <div className="cardImage" style={{backgroundImage: `url(${this.props.Thumbnail})`}}></div>
+          {/* <Card.Img variant="top" src={this.props.Thumbnail} /> */}
           <Card.Text>
       {this.props.title}
     </Card.Text>

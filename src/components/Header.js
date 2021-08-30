@@ -24,7 +24,7 @@ class Header extends React.Component {
           />
         </Link>
 
-        <Navbar.Brand><span style={{color: "white", fontSize: "2pc", fontWeight: "bolder"}}>Cube</span></Navbar.Brand>
+        <Navbar.Brand><span style={{color: "white", fontSize: "2pc", fontWeight: "bolder", userSelect: "none"}}>Cube</span></Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
