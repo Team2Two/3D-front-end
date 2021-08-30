@@ -11,6 +11,9 @@ import axios from "axios";
 import OneResult from "./oneResult";
 // import LoginButton from './loginButton'
 import "./CSS/mainPage.css";
+import AddCollection from "./AddCollection";
+import Login from './login';
+import { withAuth0 } from '@auth0/auth0-react';
 
 export class mainPage extends Component {
   constructor(props) {
@@ -39,7 +42,7 @@ export class mainPage extends Component {
       searchInput: e.target.search.value,
     });
     // http://localhost:4000/models?title=car
-    let requestURL = `http://localhost:4000/models?title=${this.state.searchInput}`;
+    let requestURL = `http://localhost:3001/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
     console.log("here here, ", retrivedURL.data);
@@ -52,7 +55,9 @@ export class mainPage extends Component {
   };
   /////////////////////////////////////////////////////////////////////////////////////////////
 
-  creatCollection = (email, collectionName) => {};
+  // creatCollection = (email, collectionName) => {
+    
+  // };
 
   //////////////////////////////////////////////////////////////////////////////////////////////
   showModal = async (title) => {
@@ -78,10 +83,34 @@ export class mainPage extends Component {
     this.setState({
       show: false,
     });
+
+
+    async function addModels (event) {
+      event.preventDefault();
+      const user = this.props.auth0;
+      console.log(user);
+      
+      let modelInfo = {
+          // title: this.props.,
+          // modelUrl:
+          email: user.user.email,
+          collectionName:event.target.collection.value
+          
+      }
+      console.log(modelInfo);
+      // console.log(modelInfo);
+      
+       let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
+       
+      //   this.setState({
+      //    books: bookData.data,
+      //  });
+      }
   };
 
   render() {
     console.log(this.state.searchResults);
+    const { user, isAuthenticated  } = this.props.auth0;
 
     return (
       <div>
@@ -117,11 +146,16 @@ export class mainPage extends Component {
           <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
 
           <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
+          <Button variant="primary" >Add</Button>
+           {isAuthenticated ? <AddCollection /> : <Login/>}
+                                   <AddCollection
+                                   addmodels={this.addModels}  />
+           {/* <AddCollection/> */}
 
-          <Accordion>
+          {/* <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
-                <Button variant="primary">Add</Button>
+               
               </Accordion.Header>
               <Accordion.Body>
                 <FloatingLabel
@@ -148,7 +182,7 @@ export class mainPage extends Component {
                 </Button>
               </Accordion.Body>
             </Accordion.Item>
-          </Accordion>
+          </Accordion> */}
           <Button variant="danger" onClick={this.handleClose}>
             Close
           </Button>
@@ -158,4 +192,4 @@ export class mainPage extends Component {
   }
 }
 
-export default mainPage;
+export default withAuth0(mainPage);
