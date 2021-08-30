@@ -17,22 +17,25 @@ export class mainPage extends Component {
       showData: false,
       Alert: "",
       show: false,
+      selectedResult: [],
+      key:''
     };
   }
 
   getData = async (e) => {
     e.preventDefault();
 
-    this.setState({
-      searchResults: [],
+    // this.setState({
+    //   searchResults: [],
       
-    });
+    // });
 
     await this.setState({
       searchInput: e.target.search.value,
     });
     // http://localhost:4000/models?title=car
-    let requestURL = `http://localhost:4000/models?title=${this.state.searchInput}`;
+    let requestURL = `http://localhost:3001/models?title=${this.state.searchInput}`;
+
 
     let retrivedURL = await axios.get(requestURL);
 console.log("here here, ", retrivedURL.data);
@@ -41,19 +44,25 @@ console.log("here here, ", retrivedURL.data);
       searchResults: retrivedURL.data,
       showData: true,
     });
+    console.log(this.state.searchResults);
   };
 
-  showModal = async (id) => {
-    let results = this.state.searchResults.filter((result) => {
-      if (result._id === id) {
+  showModal = async (title) => {
+    // let targetKey = event.target.
+    let results = this.state.searchResults.find((result) => {
+      if (result.modelName === title) {
         return result;
       }
+      // console.log(key);
     });
+    console.log(results);
 
+    
     await this.setState({
-      searchResults: results,
+     selectedResult: results,
       show: true,
     });
+    console.log(this.state.selectedResults);
   };
 
   ///////////////////////////////////////////
@@ -65,6 +74,8 @@ console.log("here here, ", retrivedURL.data);
   };
 
   render() {
+    console.log(this.state.searchResults);
+
     return (
       <div>
         
@@ -92,8 +103,8 @@ console.log("here here, ", retrivedURL.data);
                 key={i} 
                 Thumbnail={item.thumbnail}
                 title={item.modelName}
-
-                 />;
+                showData={this.showModal}
+                />;
               })}
           </div>
 
@@ -102,8 +113,9 @@ console.log("here here, ", retrivedURL.data);
 
 
           <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Title>{this.state.searchInput}</Modal.Title>
-            <iframe src={this.state.searchResults.model} title="lol"></iframe>
+            <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
+
+            <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
