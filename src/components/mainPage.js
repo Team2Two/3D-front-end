@@ -83,22 +83,28 @@ export class mainPage extends Component {
     this.setState({
       show: false,
     });
+  };
 
 
-    async function addModels (event) {
+      addModels = async(event) => {
       event.preventDefault();
+      
       const user = this.props.auth0;
       console.log(user);
+      console.log('hello');
       
       let modelInfo = {
-          // title: this.props.,
-          // modelUrl:
+          title: this.state.selectedResult.modelName,
+          modelUrl: this.state.selectedResult.modelUrl,
           email: user.user.email,
           collectionName:event.target.collection.value
           
       }
+    
+      console.log(event.target.collection.value);
       console.log(modelInfo);
       // console.log(modelInfo);
+      let collectionData = await axios.get(`${process.env.REACT_APP_SERVER}/getcollection?email=${modelInfo.email}`)
       
        let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
        
@@ -106,7 +112,7 @@ export class mainPage extends Component {
       //    books: bookData.data,
       //  });
       }
-  };
+  
 
   render() {
     console.log(this.state.searchResults);
@@ -147,9 +153,9 @@ export class mainPage extends Component {
 
           <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
           <Button variant="primary" >Add</Button>
-           {isAuthenticated ? <AddCollection /> : <Login/>}
-                                   <AddCollection
-                                   addmodels={this.addModels}  />
+           {isAuthenticated ? <AddCollection
+                                   addmodels={this.addModels}  /> : <Login/>}
+                                   
            {/* <AddCollection/> */}
 
           {/* <Accordion>

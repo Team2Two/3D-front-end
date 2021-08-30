@@ -33,14 +33,20 @@ export class AddCollection extends Component {
                   controlId="floatingSelect"
                   label="Works with selects"
                 >
-                  <Form.Select aria-label="Choose Collection" name='collection'>
+
+                   <Form  onSubmit={this.props.addmodels}>
+                  <Form.Select aria-label="Choose Collection" name='collection' >
                    
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                     
+                    
                   </Form.Select>
-                  <Button onClick={this.props.addmodels}>Add model</Button>
+                  <Button type='submit'>Add</Button>
+                  </Form>
+                  {/* <Button type='submit'>Add model</Button> */}
+                  
                 </FloatingLabel>
 
                 <Form>
