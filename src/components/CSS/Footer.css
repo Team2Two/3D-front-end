@@ -1,12 +1,14 @@
 .footer {
+border: tomato solid;
 
-
+bottom: 0;
+width: 100%;
 }
 
 
 .FTV   {
 
-    
+    /* border: tomato solid; */
     
     }
 
