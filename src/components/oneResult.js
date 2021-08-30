@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap/";
+import { Card, Button } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class OneResult extends React.Component {
@@ -7,11 +7,12 @@ class OneResult extends React.Component {
     console.log(this.props.key);
     return (
       <>
-        <Card style={{ width: "25rem" }}  onClick={()=>{this.props.showData(this.props.title)}}>
+        <Card style={{ width: "25rem" }}  >
           <Card.Img variant="top" src={this.props.Thumbnail}/>
           <Card.Text>
       {this.props.title}
     </Card.Text>
+    <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button>
         </Card>
       </>
     );

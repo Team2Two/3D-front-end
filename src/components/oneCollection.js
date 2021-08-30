@@ -8,7 +8,7 @@ class oneCollection extends React.Component {
   render() {
     return (
       <>
- <Image src="holder.js/171x180" rounded />
+ <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/OneDrive_Folder_Icon.svg/2048px-OneDrive_Folder_Icon.svg.png" rounded />
 <p>{this.props.collName}</p>
       </>
 
