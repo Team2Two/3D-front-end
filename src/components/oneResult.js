@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class OneResult extends React.Component {
   render() {
-    console.log(this.props.key);
+    
     return (
       <>
         <Card style={{ width: "20rem" }}  >

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import LoginButton from "./loginButton";
 import LogoutButton from "./logout";
 import { withAuth0 } from "@auth0/auth0-react";
-import "./CSS/Header.css"
+import "./CSS/Header.css";
 // import  DropdownMenu from   "reactstrap"
 
 class Header extends React.Component {
@@ -15,50 +15,87 @@ class Header extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <div className="TV">
-        <Link to="/">
-          {" "}
-          <img
-            src="https://www.thecube.net/images/cube_logo.png"
-            alt="logo"
-            width="100px"
-          />
-        </Link>
+          <Link to="/">
+            {" "}
+            <img
+              src="https://www.thecube.net/images/cube_logo.png"
+              alt="logo"
+              width="100px"
+            />
+          </Link>
 
-        <Navbar.Brand><span style={{color: "white", fontSize: "2pc", fontWeight: "bolder", userSelect: "none"}}>Cube</span></Navbar.Brand>
+          <Navbar.Brand>
+            <span
+              style={{
+                color: "white",
+                fontSize: "2pc",
+                fontWeight: "bolder",
+                userSelect: "none",
+              }}
+            >
+              Cube
+            </span>
+          </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto" >
-            <Link style={{textDecoration: "none", color: "white", marginTop: "0.5rem"}} to="/">Home</Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  marginTop: "0.5rem",
+                }}
+                to="/"
+              >
+                Home
+              </Link>
 
-            <NavDropdown   title="Menu" id="collasible-nav-dropdown">
-            <Link style={{textDecoration: "none", color: "black", marginLeft: "1rem"}} to="/profile">Profile</Link><br></br>
-            <Link style={{textDecoration: "none", color: "black", marginLeft: "1rem"}} to="/aboutus">About Us</Link>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
+              <NavDropdown title="Menu" id="collasible-nav-dropdown">
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    marginLeft: "1rem",
+                  }}
+                  to="/profile"
+                >
+                  Profile
+                </Link>
+                <br></br>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    marginLeft: "1rem",
+                  }}
+                  to="/aboutus"
+                >
+                  About Us
+                </Link>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
 
-
-
-
-        {isAuthenticated ? <LogoutButton /> : <LoginButton/>}
-        {isAuthenticated ?  
-        <img
-        className= "userImg"
-            src= {user.picture}
-            alt="logo"
-            width="49px"
-          />
-
-
-          : <img
-          className= "userImg"
-          src= "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"
-          alt="logo"
-          width="50px"
-        />}
-
-</div>
+          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+          {isAuthenticated ? (
+            <Link to="/profile">
+              <img
+                className="userImg"
+                src={user.picture}
+                alt="logo"
+                width="49px"
+              />
+            </Link>
+          ) : (
+            <img
+              className="userImg usertwo"
+              src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"
+              alt="logo"
+              width="50px"
+            />
+          )}
+        </div>
       </Navbar>
     );
   }

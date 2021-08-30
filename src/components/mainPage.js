@@ -27,23 +27,16 @@ export class mainPage extends Component {
     };
   }
 
-
   componentDidMount = async () => {
-    
-  
-
-    let requestURL = `http://localhost:4000/models?title=`;
+    let requestURL = `http://localhost:4000/models?title=car`;
 
     let retrivedURL = await axios.get(requestURL);
-    
 
     this.setState({
       searchResults: retrivedURL.data,
       showData: true,
     });
   };
-
-
 
   /////////////////////////////////////////////////////////////////////////////////
   getData = async (e) => {
@@ -104,19 +97,21 @@ export class mainPage extends Component {
 
     return (
       <div>
-        <Carso />
+        <div className="cover">
+          <Carso />
 
-        <Form onSubmit={this.getData}>
-          <Form.Control
-            size="lg"
-            type="text"
-            name="search"
-            placeholder="Search Models"
-          />
-          <Button variant="primary" type="submit">
-            Search
-          </Button>
-        </Form>
+          <Form onSubmit={this.getData}>
+            <Form.Control
+              size="lg"
+              type="text"
+              name="search"
+              placeholder="Search Models"
+            />
+            <Button variant="primary" type="submit">
+              Search
+            </Button>
+          </Form>
+        </div>
 
         <div className="results">
           {this.state.showData &&
@@ -132,7 +127,12 @@ export class mainPage extends Component {
             })}
         </div>
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          
+          dialogClassName="my-modal"
+        >
           <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
 
           <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
@@ -148,7 +148,6 @@ export class mainPage extends Component {
                   label="Works with selects"
                 >
                   <Form.Select aria-label="Choose Collection">
-                   
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
