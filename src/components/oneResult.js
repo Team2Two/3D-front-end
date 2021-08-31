@@ -7,8 +7,9 @@ class OneResult extends React.Component {
     // console.log(this.props.key);
     return (
       <>
-        <Card style={{ width: "25rem" }}  >
-          <Card.Img variant="top" src={this.props.Thumbnail}/>
+        <Card style={{ width: "20rem" }}  >
+        <div className="cardImage" style={{backgroundImage: `url(${this.props.Thumbnail})`}}></div>
+          {/* <Card.Img variant="top" src={this.props.Thumbnail}/> */}
           <Card.Text>
       {this.props.title}
     </Card.Text>

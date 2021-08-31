@@ -34,10 +34,27 @@ export class mainPage extends Component {
       showprofile:false
     };
   }
-  showprofile=()=>{
-  this.setState({
-    showprofile: false,
-  });}
+
+
+
+  componentDidMount = async () => {
+    
+  
+
+    let requestURL = `http://localhost:4000/models?title=`;
+
+    let retrivedURL = await axios.get(requestURL);
+    
+
+    this.setState({
+      searchResults: retrivedURL.data,
+      showData: true,
+    });
+  };
+
+
+
+
   /////////////////////////////////////////////////////////////////////////////////
   getData = async (e) => {
     e.preventDefault();
