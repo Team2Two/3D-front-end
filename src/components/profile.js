@@ -3,7 +3,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
-import { Card, Button,Modal,Form } from "react-bootstrap/";
+import { Card, Button, Modal, Form } from "react-bootstrap/";
 
 class Profile extends Component {
   constructor(props) {
@@ -15,12 +15,11 @@ class Profile extends Component {
       Alert: "",
       collectionnamearr: [],
       collectionData: [],
-      resultforeverycollectin:[],
-      show:false,
-      passpramstate:{},
+      resultforeverycollectin: [],
+      show: false,
+      passpramstate: {},
       addnewwcollecction: [],
-
-
+      msg: "",
     };
   }
 
@@ -35,8 +34,6 @@ class Profile extends Component {
           email: "",
         });
 
-      
-
     // let modelInfo = {
     //   // title: this.state.selectedResult.modelName,
     //   // modelUrl: this.state.selectedResult.modelUrl,
@@ -48,8 +45,10 @@ class Profile extends Component {
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${this.state.email}`)
-    console.log('jhjkjhjh')
+    let collectionData = await axios.get(
+      `${process.env.REACT_APP_SERVER1}/getcollection?email=${this.state.email}`
+    );
+    console.log("jhjkjhjh");
     this.setState({
       collectionData: collectionData.data,
     });
@@ -58,6 +57,12 @@ class Profile extends Component {
     let results = this.state.collectionData.map((result) => {
       if (!nameofcolectiom.includes(result.collectionOfModels)) {
         nameofcolectiom.push(result.collectionOfModels);
+      } else {                                                         //// here 
+
+        this.setState({
+          msg: "Empty",
+        });
+
       }
       return nameofcolectiom;
     });
@@ -83,23 +88,25 @@ class Profile extends Component {
     });
     console.log(this.state.resultforeverycollectin.thumbnail);
   };
-  readcollection=(event)=>{
-   event.preventDefault()
-   let arrfordata=[]
-   let collectinselect=event.target.collectin.value
-   console.log(collectinselect)
-   let results = this.state.collectionData.map((value) => {
-    if (collectinselect==value.collectionOfModels) {arrfordata.push(value)}
-    return (arrfordata)
-  });
-  this.setState({
-    resultforeverycollectin: arrfordata,
-  });
-console.log(results);
-console.log(arrfordata);
-  }
+  readcollection = (event) => {
+    event.preventDefault();
+    let arrfordata = [];
+    let collectinselect = event.target.collectin.value;
+    console.log(collectinselect);
+    let results = this.state.collectionData.map((value) => {
+      if (collectinselect == value.collectionOfModels) {
+        arrfordata.push(value);
+      }
+      return arrfordata;
+    });
+    this.setState({
+      resultforeverycollectin: arrfordata,
+    });
+    console.log(results);
+    console.log(arrfordata);
+  };
 
-  handleshow= () => {
+  handleshow = () => {
     this.setState({
       show: true,
     });
@@ -109,89 +116,82 @@ console.log(arrfordata);
       show: false,
     });
   };
-passpram=(item)=>{
-  this.setState({
-    passpramstate: item,
-  });
- this.handleshow()
+  passpram = (item) => {
+    this.setState({
+      passpramstate: item,
+    });
+    this.handleshow();
 
+    console.log(this.state.passpramstate);
+  };
+  deletemodel = (modelID2, collection) => {
+    // http://localhost:3001/deletemodels/612e39f5ebe18560634d139e?email=maiada.ibrahim.27@gmail.com&collection=hhhhhhhhhhh
+    axios
+      .delete(
+        `${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`
+      )
+      .then((data) => {
+        console.log(data);
 
- console.log(this.state.passpramstate);
-}
-deletemodel = (modelID2,collection) =>{
+        this.setState({
+          resultforeverycollectin: data.data,
+        });
+      });
+  };
 
-  // http://localhost:3001/deletemodels/612e39f5ebe18560634d139e?email=maiada.ibrahim.27@gmail.com&collection=hhhhhhhhhhh
-   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`).then((data)=>{
- console.log(data);
+  createnewcollection = async (event) => {
+    console.log("ffffffffffffffffffffffffffffffffffffffffffffff");
+    event.preventDefault();
+    const user = this.props.auth0;
+    let modelInfo = {
+      // title: this.state.selectedResult.modelName,
+      // modelUrl: this.state.selectedResult.modelUrl,
+      email: this.state.email,
+      collectionName: event.target.collectionName.value,
+    };
+    let modelData = await axios.post(
+      `${process.env.REACT_APP_SERVER1}/addmodels`,
+      modelInfo
+    );
 
-  this.setState({
-   resultforeverycollectin: data.data
-  })
+    // this.setState({
+    //   addnewwcollecction: modelData.data,
+    // });
 
-     
-   });
-  
+    // console.log(this.state.addnewwcollecction)
+    // this.setState({
+    //   collectionnamearr: nameofcolectiom,
+    // });
+    // console.log(this.state.collectionnamearr);
+    let nameofcolectiom = [];
+    let results = modelData.data.map((result) => {
+      if (!nameofcolectiom.includes(result.collectionOfModels)) {
+        nameofcolectiom.push(result.collectionOfModels);
+      }
+      return nameofcolectiom;
+    });
+    this.setState({
+      collectionnamearr: nameofcolectiom,
+    });
+  };
 
+  // deletecollection = (collection) =>{
 
-}
+  //   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels?email=${this.state.email}&collection=${collection}`).then((data)=>{
+  // console.log(data);
 
-createnewcollection = async (event) => {
-  console.log('ffffffffffffffffffffffffffffffffffffffffffffff')
-  event.preventDefault();
-  const user = this.props.auth0;
-  let modelInfo = {
-    // title: this.state.selectedResult.modelName,
-    // modelUrl: this.state.selectedResult.modelUrl,
-    email:this.state.email,
-    collectionName: event.target.collectionName.value
+  //  this.setState({
+  //   resultforeverycollectin: data.data
+  //  })
 
-  }
-  let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
+  //   });
 
-  // this.setState({
-  //   addnewwcollecction: modelData.data,
-  // });
-
-  // console.log(this.state.addnewwcollecction)
-  // this.setState({
-  //   collectionnamearr: nameofcolectiom,
-  // });
-  // console.log(this.state.collectionnamearr);
-  let nameofcolectiom =[];
-  let results = modelData.data.map((result) => {
-
-    if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
-    return (nameofcolectiom)
-  });
-  this.setState({
-    collectionnamearr: nameofcolectiom,
-  });
-
-}
-
-// deletecollection = (collection) =>{
-
-
-//   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels?email=${this.state.email}&collection=${collection}`).then((data)=>{
-// console.log(data);
-
-//  this.setState({
-//   resultforeverycollectin: data.data
-//  })
-
-    
-//   });
- 
-
-
-// }
-
+  // }
 
   render() {
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
-     
       <div className="gene">
         {isAuthenticated ? (
           <>
@@ -204,6 +204,88 @@ createnewcollection = async (event) => {
 
               <h2>{user.name}</h2>
             </div>
+ <hr style={{ width: "70%", margin: "2rem auto" }}></hr>
+            <div className="form-container">
+              <Form className="form2" onSubmit={this.createnewcollection}>
+                <Form.Control
+                  type="text"
+                  name="collectionName"
+                  placeholder="Create new collection"
+                />
+                <Button variant="primary" type="submit">
+                  Create
+                </Button>
+                {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
+                  Save
+                </Button> */}
+              </Form>
+            </div>
+            <div className="folders">
+              {this.state.collectionnamearr.map((item) => {
+                return (
+                  <form onSubmit={this.readcollection}>
+                    <input
+                      width="110px"
+                      type="image"
+                      src="https://www.iconpacks.net/icons/2/free-folder-icon-1484-thumb.png"
+                      alt="Submit"
+                    />
+                    {/* < label  value={item}>{item}</label> */}
+                    <input type="submit" value={item} name="collectin" />
+                  </form>
+                );
+              })}
+            </div>
+           
+
+            <div className="folder-models">
+              <div className="one-model">
+                {this.state.resultforeverycollectin.map((item) => {
+                  if (!item.title == "") {
+                    return (
+                      <Card>
+                        <div
+                          onClick={() => {
+                            this.passpram(item);
+                          }}
+                          className="cardImage"
+                          style={{ backgroundImage: `url(${item.thumbnail})` }}
+                        ></div>
+                        {/* <Card.Img
+                      
+                      variant="top"
+                      src={item.thumbnail}
+                    /> */}
+                        <Card.Text>{item.title}</Card.Text>
+                        <Button
+                          variant="danger"
+                          onClick={() => {
+                            this.deletemodel(item._id, item.collectionOfModels);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </Card>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+
+            <Modal
+              dialogClassName="my-modal"
+              show={this.state.show}
+              onHide={this.handleClose}
+            >
+              <Modal.Title>{this.state.passpramstate.title}</Modal.Title>
+              <iframe
+                src={this.state.passpramstate.modelCollection}
+                title="lol"
+              ></iframe>
+              <Button variant="danger" onClick={this.handleClose}>
+                Close
+              </Button>
+            </Modal>
 
             <div className="rndrcoll">
               {this.state.collections.map((item, i) => {
@@ -224,65 +306,7 @@ createnewcollection = async (event) => {
             <p>Please log in to show data</p>
           </div>
         )}
-        {this.state.collectionnamearr.map(item => {
-          return (
-         <form onSubmit={this.readcollection} >
-       
-           <input type="image"  src="https://www.computerhope.com/jargon/f/folder.png" alt="Submit"/>
-          {/* < label  value={item}>{item}</label> */}
-          <input type="submit"  value={item}  name='collectin'/>
-  
-          </form>
-
-
-          )
-        })}
-         <Form className="form2" onSubmit={this.createnewcollection}>
-              <span>Or you can create a new collection:</span>
-                <Form.Control
-                  type="text"
-                  name="collectionName"
-                  placeholder='"Collection Name"'
-                />
-                <Button variant="primary"  type="submit">
-                  Create
-                </Button>
-                {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
-                  Save
-                </Button> */}
-              </Form>
-
-         {this.state.resultforeverycollectin.map(item => {
-           if (!item.title==""){
-           return (
-            <Card              style={{ width: "25rem" }}  >
-            <Card.Img          onClick={()=>{this.passpram(item)} }              variant="top" src={item.thumbnail}/>
-            <Card.Text>
-             {item.title}
-             </Card.Text>
-            <Button variant="primary" onClick={()=>{this.deletemodel(item._id,item.collectionOfModels)}} >Delete</Button>
-            </Card>
-            
-
-
-          )}
-        })}
-          
-            <Modal show={this.state.show} onHide={this.handleClose}>
-
-            <Modal.Title>{this.state.passpramstate.title}</Modal.Title>
-            <iframe src={this.state.passpramstate.modelCollection} title="lol"></iframe>
-            <Button variant="danger" onClick={this.handleClose}>
-              Close
-            </Button>
-          </Modal>
-         
-</div>
-
-
-
-
-      
+      </div>
     );
   }
 }

@@ -34,16 +34,16 @@ export class AddCollection extends Component {
                 </Form>
 
                 <Form
-                  className="form2"
+                  className="form3"
                   onSubmit={this.props.createnewcollection}
                   
                 >
                   
-                  <span>Or you can create a new collection:</span>
+                  
                   <Form.Control
                     type="text"
                     name="NAME"
-                    placeholder='"Collection Name"'
+                    placeholder="Create a new collection"
                   />
                   <Button variant="primary"  type="submit">
                     Create

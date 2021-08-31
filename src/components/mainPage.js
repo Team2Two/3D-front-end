@@ -28,7 +28,7 @@ export class mainPage extends Component {
   }
 
   componentDidMount = async () => {
-    let requestURL = `${process.env.REACT_APP_SERVER}/models?title=game`;
+    let requestURL = `${process.env.REACT_APP_SERVER1}/models?title=game`;
 
     let retrivedURL = await axios.get(requestURL);
 
@@ -130,7 +130,7 @@ export class mainPage extends Component {
       title:"",
       // modelUrl: this.state.selectedResult.modelUrl,
       email: user.user.email,
-      collectionName: event.target.collectionName.value,
+      collectionName: event.target.NAME.value,
       // thumbnail:this.state.selectedResult.thumbnail
 
     }
@@ -138,7 +138,7 @@ export class mainPage extends Component {
       title: this.state.selectedResult.modelName,
       modelUrl: this.state.selectedResult.modelUrl,
       email: user.user.email,
-      collectionName: event.target.collectionName.value,
+      collectionName: event.target.NAME.value,
       thumbnail:this.state.selectedResult.thumbnail
 
     }
@@ -152,6 +152,12 @@ export class mainPage extends Component {
     let modelData2 = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo2);
     
    
+    this.setState({
+    
+      show: false,
+    });
+
+
   }
     //------------------------------------------------------------------------------------------------------
     
@@ -240,7 +246,7 @@ export class mainPage extends Component {
           ) : (
             <div className="warn">
               <span>
-                Please log in so you can save models to your collections <LoginButton />
+                Login to save Models <LoginButton />
               </span>
               
             </div>

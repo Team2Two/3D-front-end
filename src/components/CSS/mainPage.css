@@ -168,66 +168,116 @@ iframe {
 
 .acoElm {
   /* border: solid tomato; */
-  width: 60vw;
+  width: 50vw;
   margin: 0 auto;
   height: 9rem;
 }
 
 .form1 {
-  /* border: tomato solid; */
+  border: tomato solid;
   float: left;
   width: 20rem;
   margin-top: 1rem;
   text-align: center;
+  border-style: none;
+  border-color: white;
 }
 
-.form2 {
-  width: 30rem;
+.form1 .form-select:focus {
+ box-shadow: none;
+  }
 
+  .form1 .form-select:active {
+    box-shadow: none;
+    }
+
+
+.accordion-button:hover {
+
+  box-shadow: none;
+
+}
+
+
+.accordion-button:active {
+
+  box-shadow: none;
+  background-color: white;
+
+}
+
+.accordion-button:focus {
+
+  box-shadow: none;
+  background-color: white;
+
+}
+
+
+.form3 {
+  /* border: tomato solid; */
   float: right;
-  margin-top: 3rem;
+  width: 20rem;
+  margin-top: 1.5rem;
   text-align: center;
-  position: relative;
-  /* border: tomato solid; */
-  display: flex;
-  padding-left: 15rem;
-  /* padding-top: 1rem; */
-  /* margin-top: 2rem; */
+  /* height: 5rem; */
+ position: relative;
 }
 
 
-
-
-
-
-
-.form2 span {
+.form3 input {
+  height: 3.2rem;
+  width: 15rem;
   position: absolute;
-  left: 0;
-  top: -0.1rem;
-}
+  right: 0rem;
+  /* box-shadow: 0px 2px 5px #0000004d; */
+  border: #0000003b solid 0.1px;
+  }
+  
+  .form3 button {
+    
+position: absolute;
+top: 4.1rem;
+    }
+  
+  
+  .form3 input:focus {
+    height: 3.2rem;
+    width: 15rem;
+    background-color: white;
+    /* box-shadow: 0px 2px 5px #0000004d; */
+    border: #0000003b solid 0.1px;
+    }
+  
+    .form3 input:active {
+      height: 3.2rem;
+      width: 15rem;
+      background-color: white;
+      /* box-shadow: 0px 2px 5px #0000004d; */
+      border: #0000003b solid 0.1px;
+      }
 
-.form2 button {
-  /* border: tomato solid; */
-  position: absolute;
-  top: -1rem;
-  right: 0;
-}
+
+
+
+
 
 .close {
-  margin: 1rem auto;
-  width: 4rem;
+  margin: 7rem auto;
+  width: 7rem;
+  /* border: rgb(245, 245, 245) solid 4px; */
+ 
 }
 
 .warn {
   /* border: tomato solid; */
-  width: 33vw;
+  width: 10rem;
   
   margin: 1rem auto;
   position: relative;
-  height: 3rem;
-  display: flex;
-  flex-direction: row;
+  height: 5rem;
+  
+  
 }
 
 .warn button {
@@ -236,8 +286,8 @@ iframe {
   /* top: -1.9rem; */
   /* right: 0;  */
   /* border: tomato solid; */
-  display: inline;
-  margin-top: -0.4rem;
+  display: block;
+  /* margin-top: -0.4rem; */
 }
 
 .warn button:hover {
