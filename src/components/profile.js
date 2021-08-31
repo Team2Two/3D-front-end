@@ -3,7 +3,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
-import { Card, Button } from "react-bootstrap/";
+import { Card, Button,Modal } from "react-bootstrap/";
 
 class Profile extends Component {
   constructor(props) {
@@ -15,7 +15,9 @@ class Profile extends Component {
       Alert: "",
       collectionnamearr: [],
       collectionData: [],
-      resultforeverycollectin:[]
+      resultforeverycollectin:[],
+      show:false,
+      passpramstate:{}
 
     };
   }
@@ -73,8 +75,39 @@ class Profile extends Component {
   this.setState({
     resultforeverycollectin: arrfordata,
   });
-console.log(this.state.resultforeverycollectin.thumbnail)
+console.log(arrfordata);
   }
+
+  handleshow= () => {
+    this.setState({
+      show: true,
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      show: false,
+    });
+  };
+passpram=(item)=>{
+  this.setState({
+    passpramstate: item,
+  });
+ this.handleshow()
+
+
+ console.log(this.state.passpramstate);
+}
+deletemodel = async(modelID2,collection) =>{
+
+
+  let modelInfo = await axios.delete(`http://localhost:3001/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`)
+  console.log(modelInfo.data);
+  this.setState({
+   resultforeverycollectin: modelInfo.data
+  })
+
+
+}
 
   render() {
     const { user, isAuthenticated } = this.props.auth0;
@@ -83,10 +116,12 @@ console.log(this.state.resultforeverycollectin.thumbnail)
       <>
         {isAuthenticated ? (
           <>
-            <div>
-              <img src={user.picture} alt={user.name} />
+            <div className="info">
+              <img className="userProfileImg" src={user.picture} alt={user.name} />
+              
               <h2>{user.name}</h2>
-              <p>{user.email}</p>
+              
+             
             </div>
 
             <div className="rndrcoll">
@@ -123,27 +158,25 @@ console.log(this.state.resultforeverycollectin.thumbnail)
         })}
 
 
-{this.state.resultforeverycollectin.map(item => {
+         {this.state.resultforeverycollectin.map(item => {
+           
           return (
-            <Card style={{ width: "25rem" }}  >
-            <Card.Img variant="top" src={item.thumbnail}/>
+            <Card              style={{ width: "25rem" }}  >
+            <Card.Img          onClick={()=>{this.passpram(item)} }              variant="top" src={item.thumbnail}/>
             <Card.Text>
              {item.title}
              </Card.Text>
-            {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
+            <Button variant="primary" onClick={()=>{this.deletemodel(item._id,item.collectionOfModels)}} >Delete</Button>
             </Card>
 
 
           )
         })}
-
+          
             <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
 
-            <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
-            <Button variant="primary" onClick={this.addcollectiontoselect}>Add</Button>
-            {isAuthenticated ? <AddCollection
-              addmodels={this.addmodels} collectionnamearr={this.state.collectionnamearr} createnewcollection={this.createnewcollection} /> : <Login />}
+            <Modal.Title>{this.state.passpramstate.title}</Modal.Title>
+            <iframe src={this.state.passpramstate.modelCollection} title="lol"></iframe>
             <Button variant="danger" onClick={this.handleClose}>
               Close
             </Button>

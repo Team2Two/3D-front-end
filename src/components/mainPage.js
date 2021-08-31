@@ -14,7 +14,7 @@ import "./CSS/mainPage.css";
 import AddCollection from "./AddCollection";
 import Login from './login';
 import { withAuth0 } from '@auth0/auth0-react';
-import Profile from "./profile";
+
 
 export class mainPage extends Component {
   constructor(props) {
