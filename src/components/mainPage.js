@@ -28,7 +28,7 @@ export class mainPage extends Component {
   }
 
   componentDidMount = async () => {
-    let requestURL = `http://localhost:4000/models?title=car`;
+    let requestURL = `http://localhost:4000/models?title=game`;
 
     let retrivedURL = await axios.get(requestURL);
 
@@ -132,6 +132,7 @@ export class mainPage extends Component {
           onHide={this.handleClose}
           
           dialogClassName="my-modal"
+
         >
           <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
 

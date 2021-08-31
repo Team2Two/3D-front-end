@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
 
 nav .btn {
   margin-right: 1rem;
@@ -13,8 +13,8 @@ img {
   width: 100%;
   height: 500px;
   background-image: url(https://www.cristianmg.com/wp-content/uploads/CRAZY.gif);
-  
-  /* https://www.cristianmg.com/wp-content/uploads/CRAZY.gif */ 
+
+  /* https://www.cristianmg.com/wp-content/uploads/CRAZY.gif */
   background-size: cover;
   background-position-y: center;
   /* background-color: #911F27; */
@@ -22,33 +22,32 @@ img {
   /* position: relative; */
 }
 
-.carousel  {
-color: white;
- /* border: solid tomato; */
- margin-top: 5rem;
- font-size: 2.7pc;
- padding: 3rem 0rem;
- word-spacing: 0.3rem;
+.carousel {
+  color: white;
+  /* border: solid tomato; */
+  margin-top: 5rem;
+  font-size: 2.9pc;
+  padding: 10rem 0rem;
+  word-spacing: 0.3rem;
+  /* position: absolute; */
 }
 
-.carousel span  {
+.carousel span {
   text-shadow: 0px 3px 5px #0000005e;
-  font-family: 'Staatliches', cursive;
+  font-family: "Staatliches", cursive;
   letter-spacing: 0.1rem;
-  }
-
-.carousel-control-next, .carousel-control-prev, .carousel-indicators {
-
-display:none ;
-
 }
 
+.carousel-control-next,
+.carousel-control-prev,
+.carousel-indicators {
+  display: none;
+}
 
 form {
-  
   /* border: solid tomato; */
   width: 70%;
-  margin: 7rem auto;
+  margin: -2rem auto;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
@@ -72,15 +71,12 @@ form {
   background-color: transparent;
 }
 
-.form-control: {
+.form-control:active {
   background-color: transparent;
 }
 /* .btn {
   padding: 0.5rem 2rem;
 } */
-
-
-
 
 .results {
   /* border: solid tomato; */
@@ -93,9 +89,6 @@ form {
   justify-content: space-evenly;
 }
 
-
-
-
 .card {
   box-shadow: 0px 2px 5px hsla(0, 0%, 0%, 0.336);
   /* border: solid tomato; */
@@ -104,38 +97,36 @@ form {
   text-align: center;
 }
 
-
-
 .cardImage {
   border-radius: 10px;
   width: 100%;
   height: 300px;
-  background-size:cover;
+  background-size: cover;
   background-position-x: center;
   /* border: solid tomato; */
-
- 
 }
-
-
-
-
 
 iframe {
-padding: 1rem;
-width: 100%;
-height: 600px;
-border-radius: 30px;
+  padding: 1rem;
+  width: 100%;
+  height: 74vh;
+  border-radius: 30px;
 }
 
-
-
-
 .my-modal {
-  border-radius: 50px;
-  width: 80vw; 
-  height: 100%;   
+  width: 80vw;
+  height: 95%;
   max-width: 80vw;
-  
+
   /* border: solid tomato; */
-} 
+}
+
+.my-modal .modal-content {
+  border-radius: 15px;
+}
+
+.my-modal .modal-content .modal-title {
+  margin-top: 0.75rem;
+  font-family: sans-serif;
+  text-align: center;
+}

@@ -4,7 +4,8 @@ export class carso extends Component {
   render() {
     return (
       <div>
-        <Carousel
+        <Carousel 
+        pause={false}
           style={{ textAlign: "center", }}
         >
           <Carousel.Item>
@@ -15,7 +16,7 @@ export class carso extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <span>
-              Support your ideas with some cool 3D models that will inspire your
+              Support your ideas by some cool 3D models that will inspire your
               audience
             </span>
           </Carousel.Item>
