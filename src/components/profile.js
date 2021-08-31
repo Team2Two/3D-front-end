@@ -3,7 +3,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
-import { Card, Button } from "react-bootstrap/";
+import { Card, Button,Modal,Form } from "react-bootstrap/";
 
 class Profile extends Component {
   constructor(props) {
@@ -15,7 +15,11 @@ class Profile extends Component {
       Alert: "",
       collectionnamearr: [],
       collectionData: [],
-      resultforeverycollectin:[]
+      resultforeverycollectin:[],
+      show:false,
+      passpramstate:{},
+      addnewwcollecction: [],
+
 
     };
   }
@@ -31,18 +35,20 @@ class Profile extends Component {
         email: "",
       });
 
-    let modelInfo = {
-      // title: this.state.selectedResult.modelName,
-      // modelUrl: this.state.selectedResult.modelUrl,
-      email: user.email,
-      // collectionName: event.target.collection.value
+      
 
-    }
+    // let modelInfo = {
+    //   // title: this.state.selectedResult.modelName,
+    //   // modelUrl: this.state.selectedResult.modelUrl,
+    //   email: user.email,
+    //   // collectionName: event.target.collection.value
+
+    // }
 
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${this.state.email}`)
     console.log('jhjkjhjh')
     this.setState({
       collectionData: collectionData.data,
@@ -68,19 +74,109 @@ class Profile extends Component {
    console.log(collectinselect)
    let results = this.state.collectionData.map((value) => {
     if (collectinselect==value.collectionOfModels) {arrfordata.push(value)}
-    return (value)
+    return (arrfordata)
   });
   this.setState({
     resultforeverycollectin: arrfordata,
   });
-console.log(this.state.resultforeverycollectin.thumbnail)
+console.log(results);
+console.log(arrfordata);
   }
+
+  handleshow= () => {
+    this.setState({
+      show: true,
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      show: false,
+    });
+  };
+passpram=(item)=>{
+  this.setState({
+    passpramstate: item,
+  });
+ this.handleshow()
+
+
+ console.log(this.state.passpramstate);
+}
+deletemodel = (modelID2,collection) =>{
+
+  // http://localhost:3001/deletemodels/612e39f5ebe18560634d139e?email=maiada.ibrahim.27@gmail.com&collection=hhhhhhhhhhh
+   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`).then((data)=>{
+ console.log(data);
+
+  this.setState({
+   resultforeverycollectin: data.data
+  })
+
+     
+   });
+  
+
+
+}
+
+createnewcollection = async (event) => {
+  console.log('ffffffffffffffffffffffffffffffffffffffffffffff')
+  event.preventDefault();
+  const user = this.props.auth0;
+  let modelInfo = {
+    // title: this.state.selectedResult.modelName,
+    // modelUrl: this.state.selectedResult.modelUrl,
+    email:this.state.email,
+    collectionName: event.target.collectionName.value
+
+  }
+  let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
+
+  // this.setState({
+  //   addnewwcollecction: modelData.data,
+  // });
+
+  // console.log(this.state.addnewwcollecction)
+  // this.setState({
+  //   collectionnamearr: nameofcolectiom,
+  // });
+  // console.log(this.state.collectionnamearr);
+  let nameofcolectiom =[];
+  let results = modelData.data.map((result) => {
+
+    if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
+    return (nameofcolectiom)
+  });
+  this.setState({
+    collectionnamearr: nameofcolectiom,
+  });
+
+}
+
+// deletecollection = (collection) =>{
+
+
+//   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels?email=${this.state.email}&collection=${collection}`).then((data)=>{
+// console.log(data);
+
+//  this.setState({
+//   resultforeverycollectin: data.data
+//  })
+
+    
+//   });
+ 
+
+
+// }
+
 
   render() {
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
       <>
+      
         {isAuthenticated ? (
           <>
             <div className="info">
@@ -123,21 +219,49 @@ console.log(this.state.resultforeverycollectin.thumbnail)
 
           )
         })}
+         <Form className="form2" onSubmit={this.createnewcollection}>
+              <span>Or you can create a new collection:</span>
+                <Form.Control
+                  type="text"
+                  name="collectionName"
+                  placeholder='"Collection Name"'
+                />
+                <Button variant="primary"  type="submit">
+                  Create
+                </Button>
+                {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
+                  Save
+                </Button> */}
+              </Form>
 
-
-{this.state.resultforeverycollectin.map(item => {
-          return (
-            <Card style={{ width: "25rem" }}  >
-            <Card.Img variant="top" src={item.thumbnail}/>
+         {this.state.resultforeverycollectin.map(item => {
+           if (!item.title==""){
+           return (
+            <Card              style={{ width: "25rem" }}  >
+            <Card.Img          onClick={()=>{this.passpram(item)} }              variant="top" src={item.thumbnail}/>
             <Card.Text>
              {item.title}
              </Card.Text>
-            {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
+            <Button variant="primary" onClick={()=>{this.deletemodel(item._id,item.collectionOfModels)}} >Delete</Button>
             </Card>
+            
 
 
-          )
+          )}
         })}
+          
+            <Modal show={this.state.show} onHide={this.handleClose}>
+
+            <Modal.Title>{this.state.passpramstate.title}</Modal.Title>
+            <iframe src={this.state.passpramstate.modelCollection} title="lol"></iframe>
+            <Button variant="danger" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal>
+         
+
+
+
 
 
       </>

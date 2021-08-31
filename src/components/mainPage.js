@@ -14,7 +14,7 @@ import "./CSS/mainPage.css";
 import AddCollection from "./AddCollection";
 import Login from './login';
 import { withAuth0 } from '@auth0/auth0-react';
-import Profile from "./profile";
+
 
 export class mainPage extends Component {
   constructor(props) {
@@ -34,18 +34,7 @@ export class mainPage extends Component {
       showprofile:false
     };
   }
-
-  componentDidMount = async () => {
-    let requestURL = `http://localhost:4000/models?title=game`;
-
-    let retrivedURL = await axios.get(requestURL);
-
-    this.setState({
-      searchResults: retrivedURL.data,
-      showData: true,
-    });
-  };
-
+ 
   /////////////////////////////////////////////////////////////////////////////////
   getData = async (e) => {
     e.preventDefault();
@@ -59,7 +48,7 @@ export class mainPage extends Component {
       searchInput: e.target.search.value,
     });
     // http://localhost:4000/models?title=car
-    let requestURL = `http://localhost:3001/models?title=${this.state.searchInput}`;
+    let requestURL = `${process.env.REACT_APP_SERVER1}/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
     // console.log("here here, ", retrivedURL.data);
@@ -121,7 +110,7 @@ export class mainPage extends Component {
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${modelInfo.email}`)
     console.log('jhjkjhjh')
     this.setState({
       collectionData: collectionData.data,
@@ -139,6 +128,8 @@ export class mainPage extends Component {
     console.log(nameofcolectiom);
     console.log(this.state.collectionnamearr)
 
+    
+
 
     //  let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
 
@@ -153,19 +144,30 @@ export class mainPage extends Component {
     event.preventDefault();
     const user = this.props.auth0;
     let modelInfo = {
-      // title: this.state.selectedResult.modelName,
+      title:"",
       // modelUrl: this.state.selectedResult.modelUrl,
       email: user.user.email,
-      collectionName: event.target.collectionName.value
+      collectionName: event.target.collectionName.value,
+      // thumbnail:this.state.selectedResult.thumbnail
 
     }
-    let modelData = await axios.post(`http://localhost:3001/addmodels`, modelInfo);
+    let modelInfo2 = {
+      title: this.state.selectedResult.modelName,
+      modelUrl: this.state.selectedResult.modelUrl,
+      email: user.user.email,
+      collectionName: event.target.collectionName.value,
+      thumbnail:this.state.selectedResult.thumbnail
+
+    }
+    let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
 
     this.setState({
       addnewwcollecction: modelData.data,
     });
 
-    console.log(this.state.addnewwcollecction)
+    let modelData2 = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo2);
+    
+   
   }
     //------------------------------------------------------------------------------------------------------
     addmodels = async (event) => {
@@ -181,7 +183,11 @@ export class mainPage extends Component {
 
       }
       console.log(modelInfo)
-      let modelData = await axios.post(`http://localhost:3001/addmodels`, modelInfo);
+      let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
+
+
+      // if (this.state.selectedResult.)
+
 
       // this.setState({
       //   addnewwcollecction: modelData.data,
