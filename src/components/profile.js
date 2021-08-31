@@ -3,6 +3,8 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
+import { Card, Button } from "react-bootstrap/";
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,10 @@ class Profile extends Component {
       collections: [],
       showData: false,
       Alert: "",
+      collectionnamearr: [],
+      collectionData: [],
+      resultforeverycollectin:[]
+
     };
   }
 
@@ -19,23 +25,56 @@ class Profile extends Component {
 
     isAuthenticated
       ? await this.setState({
-          email: user.email,
-        })
+        email: user.email,
+      })
       : await this.setState({
-          email: "",
-        });
+        email: "",
+      });
 
-    let url = `http://localhost:4000//getcollection?email=${this.state.email}`;
+    let modelInfo = {
+      // title: this.state.selectedResult.modelName,
+      // modelUrl: this.state.selectedResult.modelUrl,
+      email: user.email,
+      // collectionName: event.target.collection.value
 
-    console.log(url);
-    let newCollections = await axios.get(url);
+    }
 
+    // console.log(event.target.collection.value);
+    // console.log(modelInfo);
+    // console.log(modelInfo);
+    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    console.log('jhjkjhjh')
     this.setState({
-      collections: newCollections.data,
+      collectionData: collectionData.data,
     });
+    console.log(this.state.collectionData)
+    let nameofcolectiom = []
+    let results = this.state.collectionData.map((result) => {
 
-    console.dir("hereeeeeeeeee", newCollections.data);
+      if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
+      return (nameofcolectiom)
+    });
+    this.setState({
+      collectionnamearr: nameofcolectiom,
+    });
+    console.log(nameofcolectiom);
+    console.log(this.state.collectionnamearr)
+
   };
+  readcollection=(event)=>{
+   event.preventDefault()
+   let arrfordata=[]
+   let collectinselect=event.target.collectin.value
+   console.log(collectinselect)
+   let results = this.state.collectionData.map((value) => {
+    if (collectinselect==value.collectionOfModels) {arrfordata.push(value)}
+    return (value)
+  });
+  this.setState({
+    resultforeverycollectin: arrfordata,
+  });
+console.log(this.state.resultforeverycollectin.thumbnail)
+  }
 
   render() {
     const { user, isAuthenticated } = this.props.auth0;
@@ -69,6 +108,36 @@ class Profile extends Component {
             <p>Please log in to show data</p>
           </div>
         )}
+        {this.state.collectionnamearr.map(item => {
+          return (
+         <form onSubmit={this.readcollection} >
+       
+           <input type="image"  src="https://www.computerhope.com/jargon/f/folder.png" alt="Submit"/>
+          {/* < label  value={item}>{item}</label> */}
+          <input type="submit"  value={item}  name='collectin'/>
+  
+          </form>
+
+
+          )
+        })}
+
+
+{this.state.resultforeverycollectin.map(item => {
+          return (
+            <Card style={{ width: "25rem" }}  >
+            <Card.Img variant="top" src={item.thumbnail}/>
+            <Card.Text>
+             {item.title}
+             </Card.Text>
+            {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
+            </Card>
+
+
+          )
+        })}
+
+
       </>
     );
   }
