@@ -9,50 +9,38 @@ export class AddCollection extends Component {
       <div>
         <Accordion>
           <Accordion.Item eventKey="0">
-            <Accordion.Header onClick={this.props.addCollections}>
-              Add
-            </Accordion.Header>
+            <Accordion.Header  onClick={this.props.addCollections}>Add</Accordion.Header>
             <Accordion.Body>
               <div className="acoElm">
-                <Form className="form1" onSubmit={this.props.addmodels}>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Choose a Collection"
-                    className="mb-3"
-                  >
-                    <Form.Select
-                      onClick={this.props.addCollections}
-                      aria-label="Choose Collection"
-                      name="collection"
-                    >
-                      {this.props.collectionnamearr.map((item) => {
-                        return <option value={item}>{item}</option>;
-                      })}
-                    </Form.Select>
-                  </FloatingLabel>
-                  <Button type="submit">Add</Button>
-                </Form>
-
-                <Form
-                  className="form2"
-                  onSubmit={this.props.createnewcollection}
-                  
+              <Form className="form1" onSubmit={this.props.addmodels}>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Choose a Collection"
+                  className="mb-3"
                 >
-                  
-                  <span>Or you can create a new collection:</span>
-                  <Form.Control
-                    type="text"
-                    name="NAME"
-                    placeholder='"Collection Name"'
-                  />
-                  <Button variant="primary"  type="submit">
-                    Create
-                  </Button>
-
-                  {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
+                  <Form.Select aria-label="Choose Collection" name="collection">
+                    {this.props.collectionnamearr.map((item) => {
+                      return <option value={item}>{item}</option>;
+                    })}
+                  </Form.Select>
+                </FloatingLabel>
+                <Button type="submit">Add</Button>
+              </Form>
+              <Form className="form2" onSubmit={this.props.createnewcollection}>
+              <span>Or you can create a new collection:</span>
+                <Form.Control
+                  type="text"
+                  name="collectionName"
+                  placeholder='"Collection Name"'
+                  required
+                />
+                <Button variant="primary"  type="submit" >
+                  Create
+                </Button>
+                {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
                   Save
                 </Button> */}
-                </Form>
+              </Form>
               </div>
             </Accordion.Body>
           </Accordion.Item>
@@ -61,5 +49,4 @@ export class AddCollection extends Component {
     );
   }
 }
-
 export default AddCollection;

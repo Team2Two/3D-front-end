@@ -169,22 +169,34 @@ createnewcollection = async (event) => {
 
 }
 
-// deletecollection = (collection) =>{
+deletecollection = async (collection) =>{
 
+console.log('hi');
+  let deletedcollection= await axios.delete(`${process.env.REACT_APP_SERVER1}/deletecollections/${collection}?email=${this.state.email}`)
+    console.log('hello');
+console.log(deletedcollection.data);
 
-//   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels?email=${this.state.email}&collection=${collection}`).then((data)=>{
-// console.log(data);
+let nameofcolectiom = [];
 
-//  this.setState({
-//   resultforeverycollectin: data.data
-//  })
+let results = deletedcollection.data.map((result) => {
+  if (!nameofcolectiom.includes(result.collectionOfModels)) {
+    nameofcolectiom.push(result.collectionOfModels);
+  }
+  return nameofcolectiom;
+});
+this.setState({
+  collectionnamearr: nameofcolectiom,
+});
+
 
     
-//   });
+ 
  
 
 
-// }
+}
+
+
 
 
   render() {
@@ -225,10 +237,13 @@ createnewcollection = async (event) => {
           </div>
         )}
         {this.state.collectionnamearr.map(item => {
+          
           return (
+            
          <form onSubmit={this.readcollection} >
        
            <input type="image"  src="https://www.computerhope.com/jargon/f/folder.png" alt="Submit"/>
+           <Button onClick={()=>{this.deletecollection(`${item}`)}} >Delete</Button>
           {/* < label  value={item}>{item}</label> */}
           <input type="submit"  value={item}  name='collectin'/>
   
