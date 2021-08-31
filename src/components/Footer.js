@@ -28,12 +28,13 @@ class Footer extends React.Component {
 
           <ul style={{ color: "white", listStyle: "none" }}>
             <li>
-              <Link style={{ color: "white", textDecoration: "none" }} to="/">
+              <Link className="hvrEfct" style={{ color: "white", textDecoration: "none" }} to="/">
                 Home
               </Link>
             </li>
             <li>
               <Link
+              className="hvrEfct"
                 style={{ color: "white", textDecoration: "none" }}
                 to="/profile"
               >
@@ -42,10 +43,11 @@ class Footer extends React.Component {
             </li>
             <li>
               <Link
+              className="hvrEfct"
                 style={{ color: "white", textDecoration: "none" }}
                 to="/aboutus"
               >
-                AbouT Us
+                About Us
               </Link>
             </li>
           </ul>

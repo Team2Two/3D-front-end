@@ -7,14 +7,14 @@ class OneResult extends React.Component {
     
     return (
       <>
-        <Card style={{ width: "20rem" }}  >
+        <Card style={{ width: "22rem" }}  >
         <div className="cardImage" style={{backgroundImage: `url(${this.props.Thumbnail})`}}></div>
           {/* <Card.Img variant="top" src={this.props.Thumbnail}/> */}
           <Card.Text>
       {this.props.title}
     </Card.Text>
-    <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button>
-        </Card>
+    <Button variant="primary" className="showBtn" onClick={()=>{this.props.showData(this.props.title)}} >Render</Button>
+        </Card> 
       </>
     );
   }

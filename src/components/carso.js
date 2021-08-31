@@ -9,16 +9,16 @@ export class carso extends Component {
           style={{ textAlign: "center", }}
         >
           <Carousel.Item>
-            <span>Search for 3D models from a variety of options</span>
+            <span><q>Search for 3D models from a variety of options</q></span>
           </Carousel.Item>
           <Carousel.Item>
-            <span>Expand your collection by adding more models</span>
+            <span><q>Expand your collection by adding more models</q></span>
           </Carousel.Item>
           <Carousel.Item>
-            <span>
+            <span><q>
               Support your ideas by some cool 3D models that will inspire your
               audience
-            </span>
+              </q> </span>
           </Carousel.Item>
         </Carousel>
       </div>

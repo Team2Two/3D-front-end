@@ -3,7 +3,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
-import { Card, Button } from "react-bootstrap/";
+import { Card } from "react-bootstrap/";
 
 class Profile extends Component {
   constructor(props) {
@@ -24,25 +24,26 @@ class Profile extends Component {
     const { user, isAuthenticated } = this.props.auth0;
 
     isAuthenticated
-      ? await this.setState({
+    ? await this.setState({
         email: user.email,
       })
-      : await this.setState({
+    : await this.setState({
         email: "",
       });
 
-    let modelInfo = {
-      // title: this.state.selectedResult.modelName,
-      // modelUrl: this.state.selectedResult.modelUrl,
-      email: user.email,
-      // collectionName: event.target.collection.value
 
-    }
+    // let modelInfo = {
+    //   // title: this.state.selectedResult.modelName,
+    //   // modelUrl: this.state.selectedResult.modelUrl,
+    //   email: user.email,
+    //   // collectionName: event.target.collection.value
+
+    // }
 
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER}/getcollection?email=${this.state.email}`)
     console.log('jhjkjhjh')
     this.setState({
       collectionData: collectionData.data,

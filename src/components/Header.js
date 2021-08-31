@@ -10,6 +10,10 @@ import "./CSS/Header.css";
 // import  DropdownMenu from   "reactstrap"
 
 class Header extends React.Component {
+
+
+
+
   render() {
     const { user, isAuthenticated } = this.props.auth0;
     return (
@@ -41,6 +45,7 @@ class Header extends React.Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Link
+                className="hvrEfct"
                 style={{
                   textDecoration: "none",
                   color: "white",
@@ -51,8 +56,9 @@ class Header extends React.Component {
                 Home
               </Link>
 
-              <NavDropdown title="Menu" id="collasible-nav-dropdown">
+              <NavDropdown title="Menu" id="collasible-nav-dropdown"   renderMenuOnMount={true}>
                 <Link
+                  className="hvrEfct"
                   style={{
                     textDecoration: "none",
                     color: "black",
@@ -64,6 +70,7 @@ class Header extends React.Component {
                 </Link>
                 <br></br>
                 <Link
+                  className="hvrEfct"
                   style={{
                     textDecoration: "none",
                     color: "black",
