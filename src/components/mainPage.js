@@ -34,10 +34,7 @@ export class mainPage extends Component {
       showprofile:false
     };
   }
-  showprofile=()=>{
-  this.setState({
-    showprofile: false,
-  });}
+ 
   /////////////////////////////////////////////////////////////////////////////////
   getData = async (e) => {
     e.preventDefault();

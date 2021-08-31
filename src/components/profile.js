@@ -137,6 +137,22 @@ console.log(this.state.resultforeverycollectin.thumbnail)
           )
         })}
 
+            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
+
+            <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
+            <Button variant="primary" onClick={this.addcollectiontoselect}>Add</Button>
+            {isAuthenticated ? <AddCollection
+              addmodels={this.addmodels} collectionnamearr={this.state.collectionnamearr} createnewcollection={this.createnewcollection} /> : <Login />}
+            <Button variant="danger" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal>
+         
+
+
+
+
 
       </>
     );
