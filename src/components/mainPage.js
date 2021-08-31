@@ -115,13 +115,14 @@ export class mainPage extends Component {
        let results = this.state.collectionData.map((result) => {
        
        if(!nameofcolectiom.includes(result.collectionOfModels)) {nameofcolectiom.push(result.collectionOfModels)}
+       console.log(result.collectionOfModels);
        return(nameofcolectiom)
       });
       console.log(nameofcolectiom);
       console.log(results)
      
   
-      //  let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
+       let modelData = await axios.post(`http://localhost:3001/addmodels`,modelInfo);
        
       //   this.setState({
       //    books: bookData.data,
