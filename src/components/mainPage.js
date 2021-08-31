@@ -48,7 +48,7 @@ export class mainPage extends Component {
       searchInput: e.target.search.value,
     });
     // http://localhost:4000/models?title=car
-    let requestURL = `http://localhost:3001/models?title=${this.state.searchInput}`;
+    let requestURL = `${process.env.REACT_APP_SERVER1}/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
     // console.log("here here, ", retrivedURL.data);
@@ -110,7 +110,7 @@ export class mainPage extends Component {
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${modelInfo.email}`)
     console.log('jhjkjhjh')
     this.setState({
       collectionData: collectionData.data,
@@ -148,7 +148,7 @@ export class mainPage extends Component {
       collectionName: event.target.collectionName.value
 
     }
-    let modelData = await axios.post(`http://localhost:3001/addmodels`, modelInfo);
+    let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
 
     this.setState({
       addnewwcollecction: modelData.data,
@@ -170,7 +170,7 @@ export class mainPage extends Component {
 
       }
       console.log(modelInfo)
-      let modelData = await axios.post(`http://localhost:3001/addmodels`, modelInfo);
+      let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
 
       // this.setState({
       //   addnewwcollecction: modelData.data,

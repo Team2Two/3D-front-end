@@ -44,7 +44,7 @@ class Profile extends Component {
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${modelInfo.email}`)
     console.log('jhjkjhjh')
     this.setState({
       collectionData: collectionData.data,
@@ -70,11 +70,12 @@ class Profile extends Component {
    console.log(collectinselect)
    let results = this.state.collectionData.map((value) => {
     if (collectinselect==value.collectionOfModels) {arrfordata.push(value)}
-    return (value)
+    return (arrfordata)
   });
   this.setState({
     resultforeverycollectin: arrfordata,
   });
+console.log(results);
 console.log(arrfordata);
   }
 
@@ -97,14 +98,19 @@ passpram=(item)=>{
 
  console.log(this.state.passpramstate);
 }
-deletemodel = async(modelID2,collection) =>{
+deletemodel = (modelID2,collection) =>{
 
 
-  let modelInfo = await axios.delete(`http://localhost:3001/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`)
-  console.log(modelInfo.data);
+   axios.delete(`${process.env.REACT_APP_SERVER1}/${modelID2}?email=${this.state.email}&collection=${collection}`).then((data)=>{
+ console.log(data);
+
   this.setState({
-   resultforeverycollectin: modelInfo.data
+   resultforeverycollectin: data.data
   })
+
+     
+   });
+  
 
 
 }
