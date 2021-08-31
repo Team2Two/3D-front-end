@@ -29,11 +29,11 @@ class Profile extends Component {
 
     isAuthenticated
       ? await this.setState({
-        email: user.email,
-      })
+          email: user.email,
+        })
       : await this.setState({
-        email: "",
-      });
+          email: "",
+        });
 
       
 
@@ -53,19 +53,35 @@ class Profile extends Component {
     this.setState({
       collectionData: collectionData.data,
     });
-    console.log(this.state.collectionData)
-    let nameofcolectiom = []
+    console.log(this.state.collectionData);
+    let nameofcolectiom = [];
     let results = this.state.collectionData.map((result) => {
-
-      if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
-      return (nameofcolectiom)
+      if (!nameofcolectiom.includes(result.collectionOfModels)) {
+        nameofcolectiom.push(result.collectionOfModels);
+      }
+      return nameofcolectiom;
     });
     this.setState({
       collectionnamearr: nameofcolectiom,
     });
     console.log(nameofcolectiom);
-    console.log(this.state.collectionnamearr)
-
+    console.log(this.state.collectionnamearr);
+  };
+  readcollection = (event) => {
+    event.preventDefault();
+    let arrfordata = [];
+    let collectinselect = event.target.collectin.value;
+    console.log(collectinselect);
+    let results = this.state.collectionData.map((value) => {
+      if (collectinselect == value.collectionOfModels) {
+        arrfordata.push(value);
+      }
+      return value;
+    });
+    this.setState({
+      resultforeverycollectin: arrfordata,
+    });
+    console.log(this.state.resultforeverycollectin.thumbnail);
   };
   readcollection=(event)=>{
    event.preventDefault()
@@ -175,16 +191,17 @@ createnewcollection = async (event) => {
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
-      <>
-      
+      <div className="gene">
         {isAuthenticated ? (
           <>
             <div className="info">
-              <img className="userProfileImg" src={user.picture} alt={user.name} />
-              
+              <img
+                className="userProfileImg"
+                src={user.picture}
+                alt={user.name}
+              />
+
               <h2>{user.name}</h2>
-              
-             
             </div>
 
             <div className="rndrcoll">

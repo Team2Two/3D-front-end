@@ -4,7 +4,7 @@ margin-right: 1rem;
 /* filter: invert(1); */
 border-radius: 65px;
 right: 0;
-top: 2.2rem;
+top: 2rem;
 }
 
 .usertwo{
@@ -28,7 +28,7 @@ right: 3rem;
     background-color: transparent;
     border-style: none;
 /* padding: 0.2rem 0.5rem; */
-margin-top: 1.5rem;
+margin-top: 0.9rem;
 
 }
 
@@ -89,4 +89,21 @@ color: transparent;
 
 }
 
+.nav-item.dropdown {
 
+    margin-left: 1rem;
+    margin-top: 0.3px;
+    color: white;
+}
+
+.nav-item.dropdown.hvrEfct {
+
+    color: white;
+
+}
+
+
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
