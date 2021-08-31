@@ -35,25 +35,16 @@ export class mainPage extends Component {
     };
   }
 
-
-
   componentDidMount = async () => {
-    
-  
-
-    let requestURL = `http://localhost:4000/models?title=`;
+    let requestURL = `http://localhost:4000/models?title=game`;
 
     let retrivedURL = await axios.get(requestURL);
-    
 
     this.setState({
       searchResults: retrivedURL.data,
       showData: true,
     });
   };
-
-
-
 
   /////////////////////////////////////////////////////////////////////////////////
   getData = async (e) => {

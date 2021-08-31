@@ -1,8 +1,8 @@
 .footer {
-border: tomato solid;
+/* border: tomato solid; */
+position: static;
 
-bottom: 0;
-width: 100%;
+/* width: 100%; */
 }
 
 

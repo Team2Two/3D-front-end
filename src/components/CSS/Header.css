@@ -1,12 +1,20 @@
 .userImg {
-
-/* margin-right: 1rem; */
-filter: invert(1);
+position: absolute;
+margin-right: 1rem;
+/* filter: invert(1); */
 border-radius: 65px;
+right: 0;
+top: 2.2rem;
+}
+
+.usertwo{
+
+    filter: invert(1);
+
 }
 
 .TV {
-
+position: relative;
 /* border: solid tomato; */
 width: 80%;
 margin: 0 auto;
@@ -14,9 +22,38 @@ display: flex;
 align-items: center;
 }
 
-.btn {
+.only {
+position: absolute;
+right: 3rem;
+    background-color: transparent;
+    border-style: none;
+/* padding: 0.2rem 0.5rem; */
+margin-top: 1.5rem;
 
-padding: 0.5rem 1rem;
+}
+
+
+.only:hover {
+    background-color: transparent;
+    border-style: none;
+/* padding: 0.2rem 0.5rem; */
+box-shadow: none;
+
+}
+
+.only:active {
+    background-color: transparent;
+    border-style: none;
+/* padding: 0.2rem 0.5rem; */
+
+box-shadow: none;
+}
+
+.only:focus {
+    background-color: transparent;
+    border-style: none;
+/* padding: 0.2rem 0.5rem; */
+box-shadow: none;
 
 }
 
