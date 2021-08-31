@@ -191,6 +191,7 @@ createnewcollection = async (event) => {
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
+     
       <div className="gene">
         {isAuthenticated ? (
           <>
@@ -276,12 +277,12 @@ createnewcollection = async (event) => {
             </Button>
           </Modal>
          
+</div>
 
 
 
 
-
-      </>
+      
     );
   }
 }

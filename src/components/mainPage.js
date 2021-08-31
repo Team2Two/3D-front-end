@@ -47,7 +47,7 @@ export class mainPage extends Component {
       searchInput: e.target.search.value,
     });
     
-    let requestURL = `${process.env.REACT_APP_SERVER}/models?title=${this.state.searchInput}`;
+    let requestURL = `${process.env.REACT_APP_SERVER1}/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
     
@@ -99,7 +99,7 @@ export class mainPage extends Component {
 
    
     let collectionData = await axios.get(
-      `${process.env.REACT_APP_SERVER}/getcollection?email=${modelInfo.email}`
+      `${process.env.REACT_APP_SERVER1}/getcollection?email=${modelInfo.email}`
     );
     console.log("jhjkjhjh");
     this.setState({
@@ -154,29 +154,7 @@ export class mainPage extends Component {
    
   }
     //------------------------------------------------------------------------------------------------------
-    addmodels = async (event) => {
-      console.log('ggggggggggggggggggggggggg')
-      event.preventDefault();
-      const user = this.props.auth0;
-      let modelInfo = {
-        title: this.state.selectedResult.modelName,
-        modelUrl: this.state.selectedResult.modelUrl,
-        email: user.user.email,
-        collectionName: event.target.collection.value,
-        thumbnail:this.state.selectedResult.thumbnail
-
-      }
-      console.log(modelInfo)
-      let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
-
-
-      // if (this.state.selectedResult.)
-
-
-
-    console.log(this.state.addnewwcollecction);
-  };
-  //------------------------------------------------------------------------------------------------------
+    
   addmodels = async (event) => {
     console.log("ggggggggggggggggggggggggg");
     event.preventDefault();
@@ -190,7 +168,7 @@ export class mainPage extends Component {
     };
     console.log(modelInfo);
     let modelData = await axios.post(
-      `${process.env.REACT_APP_SERVER}/addmodels`,
+      `${process.env.REACT_APP_SERVER1}/addmodels`,
       modelInfo
     );
 
