@@ -3,7 +3,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
-import { Card, Button,Modal } from "react-bootstrap/";
+import { Card, Button,Modal,Form } from "react-bootstrap/";
 
 class Profile extends Component {
   constructor(props) {
@@ -17,7 +17,9 @@ class Profile extends Component {
       collectionData: [],
       resultforeverycollectin:[],
       show:false,
-      passpramstate:{}
+      passpramstate:{},
+      addnewwcollecction: [],
+
 
     };
   }
@@ -32,6 +34,8 @@ class Profile extends Component {
       : await this.setState({
         email: "",
       });
+
+      
 
     // let modelInfo = {
     //   // title: this.state.selectedResult.modelName,
@@ -115,11 +119,64 @@ deletemodel = (modelID2,collection) =>{
 
 }
 
+createnewcollection = async (event) => {
+  console.log('ffffffffffffffffffffffffffffffffffffffffffffff')
+  event.preventDefault();
+  const user = this.props.auth0;
+  let modelInfo = {
+    // title: this.state.selectedResult.modelName,
+    // modelUrl: this.state.selectedResult.modelUrl,
+    email:this.state.email,
+    collectionName: event.target.collectionName.value
+
+  }
+  let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
+
+  // this.setState({
+  //   addnewwcollecction: modelData.data,
+  // });
+
+  // console.log(this.state.addnewwcollecction)
+  // this.setState({
+  //   collectionnamearr: nameofcolectiom,
+  // });
+  // console.log(this.state.collectionnamearr);
+  let nameofcolectiom =[];
+  let results = modelData.data.map((result) => {
+
+    if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
+    return (nameofcolectiom)
+  });
+  this.setState({
+    collectionnamearr: nameofcolectiom,
+  });
+
+}
+
+// deletecollection = (collection) =>{
+
+
+//   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels?email=${this.state.email}&collection=${collection}`).then((data)=>{
+// console.log(data);
+
+//  this.setState({
+//   resultforeverycollectin: data.data
+//  })
+
+    
+//   });
+ 
+
+
+// }
+
+
   render() {
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
       <>
+      
         {isAuthenticated ? (
           <>
             <div className="info">
@@ -162,11 +219,24 @@ deletemodel = (modelID2,collection) =>{
 
           )
         })}
-
+         <Form className="form2" onSubmit={this.createnewcollection}>
+              <span>Or you can create a new collection:</span>
+                <Form.Control
+                  type="text"
+                  name="collectionName"
+                  placeholder='"Collection Name"'
+                />
+                <Button variant="primary"  type="submit">
+                  Create
+                </Button>
+                {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
+                  Save
+                </Button> */}
+              </Form>
 
          {this.state.resultforeverycollectin.map(item => {
-           
-          return (
+           if (!item.title==""){
+           return (
             <Card              style={{ width: "25rem" }}  >
             <Card.Img          onClick={()=>{this.passpram(item)} }              variant="top" src={item.thumbnail}/>
             <Card.Text>
@@ -174,9 +244,10 @@ deletemodel = (modelID2,collection) =>{
              </Card.Text>
             <Button variant="primary" onClick={()=>{this.deletemodel(item._id,item.collectionOfModels)}} >Delete</Button>
             </Card>
+            
 
 
-          )
+          )}
         })}
           
             <Modal show={this.state.show} onHide={this.handleClose}>

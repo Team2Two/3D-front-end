@@ -128,6 +128,8 @@ export class mainPage extends Component {
     console.log(nameofcolectiom);
     console.log(this.state.collectionnamearr)
 
+    
+
 
     //  let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
 
@@ -142,10 +144,19 @@ export class mainPage extends Component {
     event.preventDefault();
     const user = this.props.auth0;
     let modelInfo = {
-      // title: this.state.selectedResult.modelName,
+      title:"",
       // modelUrl: this.state.selectedResult.modelUrl,
       email: user.user.email,
-      collectionName: event.target.collectionName.value
+      collectionName: event.target.collectionName.value,
+      // thumbnail:this.state.selectedResult.thumbnail
+
+    }
+    let modelInfo2 = {
+      title: this.state.selectedResult.modelName,
+      modelUrl: this.state.selectedResult.modelUrl,
+      email: user.user.email,
+      collectionName: event.target.collectionName.value,
+      thumbnail:this.state.selectedResult.thumbnail
 
     }
     let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
@@ -154,7 +165,9 @@ export class mainPage extends Component {
       addnewwcollecction: modelData.data,
     });
 
-    console.log(this.state.addnewwcollecction)
+    let modelData2 = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo2);
+    
+   
   }
     //------------------------------------------------------------------------------------------------------
     addmodels = async (event) => {
@@ -171,6 +184,10 @@ export class mainPage extends Component {
       }
       console.log(modelInfo)
       let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
+
+
+      // if (this.state.selectedResult.)
+
 
       // this.setState({
       //   addnewwcollecction: modelData.data,
