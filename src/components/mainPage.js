@@ -14,6 +14,7 @@ import "./CSS/mainPage.css";
 import AddCollection from "./AddCollection";
 import Login from './login';
 import { withAuth0 } from '@auth0/auth0-react';
+import Profile from "./profile";
 
 export class mainPage extends Component {
   constructor(props) {
@@ -27,9 +28,16 @@ export class mainPage extends Component {
       show: false,
       selectedResult: [],
       key: "",
-      collectionData:[]
+      collectionData: [],
+      collectionnamearr: [],
+      addnewwcollecction: [],
+      showprofile:false
     };
   }
+  showprofile=()=>{
+  this.setState({
+    showprofile: false,
+  });}
   /////////////////////////////////////////////////////////////////////////////////
   getData = async (e) => {
     e.preventDefault();
@@ -57,7 +65,7 @@ export class mainPage extends Component {
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   // creatCollection = (email, collectionName) => {
-    
+
   // };
 
   //////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +83,7 @@ export class mainPage extends Component {
       selectedResult: results,
       show: true,
     });
-    // console.log(this.state.selectedResults);
+    console.log(this.state.selectedResults);
   };
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -86,131 +94,150 @@ export class mainPage extends Component {
     });
   };
 
+  //------------------------------------------------------------------------------------------------------
+  addcollectiontoselect = async (event) => {
+    event.preventDefault();
 
-      addModels = async(event) => {
-      event.preventDefault();
-      
-      const user = this.props.auth0;
-      // console.log(user);
-      // console.log('hello');
-      
-      let modelInfo = {
-          title: this.state.selectedResult.modelName,
-          modelUrl: this.state.selectedResult.modelUrl,
-          email: user.user.email,
-          collectionName:event.target.collection.value
-          
-      }
-    
-      // console.log(event.target.collection.value);
-      // console.log(modelInfo);
-      // console.log(modelInfo);
-      let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
-      console.log('jhjkjhjh')
-        this.setState({
-          collectionData: collectionData.data,
-       });
-       console.log(this.state.collectionData)
-       let nameofcolectiom=[]
-       let results = this.state.collectionData.map((result) => {
-       
-       if(!nameofcolectiom.includes(result.collectionOfModels)) {nameofcolectiom.push(result.collectionOfModels)}
-       return(nameofcolectiom)
-      });
-      console.log(nameofcolectiom);
-      console.log(results)
-     
-  
-      //  let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
-       
-      //   this.setState({
-      //    books: bookData.data,
-      //  });
-      }
-  
+    const user = this.props.auth0;
+    // console.log(user);
+    // console.log('hello');
 
-  render() {
-    // console.log(this.state.searchResults);
-    const { user, isAuthenticated  } = this.props.auth0;
+    let modelInfo = {
+      // title: this.state.selectedResult.modelName,
+      // modelUrl: this.state.selectedResult.modelUrl,
+      email: user.user.email,
+      // collectionName: event.target.collection.value
 
-    return (
-      <div>
-        <Carso />
+    }
 
-        <Form onSubmit={this.getData}>
-          <Form.Control
-            size="lg"
-            type="text"
-            name="search"
-            placeholder="Search Models"
-          />
-          <Button variant="primary" type="submit">
-            Search
-          </Button>
-        </Form>
+    // console.log(event.target.collection.value);
+    // console.log(modelInfo);
+    // console.log(modelInfo);
+    let collectionData = await axios.get(`http://localhost:3001/getcollection?email=${modelInfo.email}`)
+    console.log('jhjkjhjh')
+    this.setState({
+      collectionData: collectionData.data,
+    });
+    console.log(this.state.collectionData)
+    let nameofcolectiom = []
+    let results = this.state.collectionData.map((result) => {
 
-        <div className="results">
-          {this.state.showData &&
-            this.state.searchResults.map((item, i) => {
-              return (
-                <OneResult
-                  key={i}
-                  Thumbnail={item.thumbnail}
-                  title={item.modelName}
-                  showData={this.showModal}
-                />
-              );
-            })}
-        </div>
+      if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
+      return (nameofcolectiom)
+    });
+    this.setState({
+      collectionnamearr: nameofcolectiom,
+    });
+    console.log(nameofcolectiom);
+    console.log(this.state.collectionnamearr)
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
 
-          <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
-          <Button variant="primary" >Add</Button>
-           {isAuthenticated ? <AddCollection
-                                   addmodels={this.addModels}  /> : <Login/>}
-                                   
-           {/* <AddCollection/> */}
+    //  let modelData = await axios.post(`${process.env.REACT_APP_SERVER}/addmodels`,modelInfo);
 
-          {/* <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-               
-              </Accordion.Header>
-              <Accordion.Body>
-                <FloatingLabel
-                  controlId="floatingSelect"
-                  label="Works with selects"
-                >
-                  <Form.Select aria-label="Choose Collection">
-                   
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </Form.Select>
-                </FloatingLabel>
-
-                <Form>
-                  <Form.Control
-                    type="text"
-                    name="collectionName"
-                    placeholder="Collection Name"
-                  />
-                </Form>
-                <Button variant="secondary" type="submit">
-                  Create
-                </Button>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion> */}
-          <Button variant="danger" onClick={this.handleClose}>
-            Close
-          </Button>
-        </Modal>
-      </div>
-    );
+    //   this.setState({
+    //    books: bookData.data,
+    //  });
   }
-}
 
-export default withAuth0(mainPage);
+  //-------------------------------------------------------------------------------------------------
+  createnewcollection = async (event) => {
+    console.log('ffffffffffffffffffffffffffffffffffffffffffffff')
+    event.preventDefault();
+    const user = this.props.auth0;
+    let modelInfo = {
+      // title: this.state.selectedResult.modelName,
+      // modelUrl: this.state.selectedResult.modelUrl,
+      email: user.user.email,
+      collectionName: event.target.collectionName.value
+
+    }
+    let modelData = await axios.post(`http://localhost:3001/addmodels`, modelInfo);
+
+    this.setState({
+      addnewwcollecction: modelData.data,
+    });
+
+    console.log(this.state.addnewwcollecction)
+  }
+    //------------------------------------------------------------------------------------------------------
+    addmodels = async (event) => {
+      console.log('ggggggggggggggggggggggggg')
+      event.preventDefault();
+      const user = this.props.auth0;
+      let modelInfo = {
+        title: this.state.selectedResult.modelName,
+        modelUrl: this.state.selectedResult.modelUrl,
+        email: user.user.email,
+        collectionName: event.target.collection.value,
+        thumbnail:this.state.selectedResult.thumbnail
+
+      }
+      console.log(modelInfo)
+      let modelData = await axios.post(`http://localhost:3001/addmodels`, modelInfo);
+
+      // this.setState({
+      //   addnewwcollecction: modelData.data,
+
+
+      // });
+
+    }
+
+    // getUserCollections = async () => {
+
+    // }
+    render() {
+      // console.log(this.state.searchResults);
+      const { user, isAuthenticated } = this.props.auth0;
+
+      return (
+        <div>
+          <Carso />
+
+          <Form onSubmit={this.getData}>
+            <Form.Control
+              size="lg"
+              type="text"
+              name="search"
+              placeholder="Search Models"
+            />
+            <Button variant="primary" type="submit">
+              Search
+            </Button>
+          </Form>
+
+          <div className="results">
+            {this.state.showData &&
+              this.state.searchResults.map((item, i) => {
+                return (
+                  <OneResult
+                    key={i}
+                    Thumbnail={item.thumbnail}
+                    title={item.modelName}
+                    showData={this.showModal}
+                  />
+                );
+              })}
+          </div>
+
+          <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
+
+            <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
+            <Button variant="primary" onClick={this.addcollectiontoselect}>Add</Button>
+            {isAuthenticated ? <AddCollection
+              addmodels={this.addmodels} collectionnamearr={this.state.collectionnamearr} createnewcollection={this.createnewcollection} /> : <Login />}
+            <Button variant="danger" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal>
+         
+       
+        
+        
+        </div>
+      );
+    }
+  }
+
+  export default withAuth0(mainPage);

@@ -23,21 +23,28 @@ export class AddCollection extends Component {
     render() {
         return (
             <div>
-                <Accordion>
+              <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                
               </Accordion.Header>
               <Accordion.Body>
                 <FloatingLabel
+                  // label="Works with selects"
                   controlId="floatingSelect"
-                  label="Works with selects"
-                >
+                  >
 
                    <Form  onSubmit={this.props.addmodels}>
-                  <Form.Select aria-label="Choose Collection" name='collection' >
-                   
-                    <option value="1">One</option>
+
+                  <Form.Select aria-label="Choose Collection" name='collection'  >
+                  
+                  {this.props.collectionnamearr.map(item => {
+                   return (
+                     <option value={item }>{item }</option>
+              
+                        )
+                     })}
+                  
                   
                     
                     
@@ -48,16 +55,16 @@ export class AddCollection extends Component {
                   
                 </FloatingLabel>
 
-                <Form>
+                <Form  onSubmit={this.props.createnewcollection}>
                   <Form.Control
                     type="text"
                     name="collectionName"
                     placeholder="Collection Name"
                   />
-                </Form>
                 <Button variant="secondary" type="submit">
                   Create
                 </Button>
+                </Form>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
