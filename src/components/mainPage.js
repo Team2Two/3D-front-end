@@ -196,6 +196,7 @@ export class mainPage extends Component {
                   Thumbnail={item.thumbnail}
                   title={item.modelName}
                   showData={this.showModal}
+                 
                 />
               );
             })}

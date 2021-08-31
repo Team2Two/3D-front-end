@@ -3,7 +3,8 @@ import { withAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
-import { Card } from "react-bootstrap/";
+import { Card, Button } from "react-bootstrap/";
+
 
 class Profile extends Component {
   constructor(props) {
@@ -15,8 +16,7 @@ class Profile extends Component {
       Alert: "",
       collectionnamearr: [],
       collectionData: [],
-      resultforeverycollectin:[]
-
+      resultforeverycollectin: [],
     };
   }
 
@@ -24,13 +24,12 @@ class Profile extends Component {
     const { user, isAuthenticated } = this.props.auth0;
 
     isAuthenticated
-    ? await this.setState({
-        email: user.email,
-      })
-    : await this.setState({
-        email: "",
-      });
-
+      ? await this.setState({
+          email: user.email,
+        })
+      : await this.setState({
+          email: "",
+        });
 
     // let modelInfo = {
     //   // title: this.state.selectedResult.modelName,
@@ -43,53 +42,60 @@ class Profile extends Component {
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER}/getcollection?email=${this.state.email}`)
-    console.log('jhjkjhjh')
+    let collectionData = await axios.get(
+      `${process.env.REACT_APP_SERVER}/getcollection?email=${this.state.email}`
+    );
+    console.log("jhjkjhjh");
     this.setState({
       collectionData: collectionData.data,
     });
-    console.log(this.state.collectionData)
-    let nameofcolectiom = []
+    console.log(this.state.collectionData);
+    let nameofcolectiom = [];
     let results = this.state.collectionData.map((result) => {
-
-      if (!nameofcolectiom.includes(result.collectionOfModels)) { nameofcolectiom.push(result.collectionOfModels) }
-      return (nameofcolectiom)
+      if (!nameofcolectiom.includes(result.collectionOfModels)) {
+        nameofcolectiom.push(result.collectionOfModels);
+      }
+      return nameofcolectiom;
     });
     this.setState({
       collectionnamearr: nameofcolectiom,
     });
     console.log(nameofcolectiom);
-    console.log(this.state.collectionnamearr)
-
+    console.log(this.state.collectionnamearr);
   };
-  readcollection=(event)=>{
-   event.preventDefault()
-   let arrfordata=[]
-   let collectinselect=event.target.collectin.value
-   console.log(collectinselect)
-   let results = this.state.collectionData.map((value) => {
-    if (collectinselect==value.collectionOfModels) {arrfordata.push(value)}
-    return (value)
-  });
-  this.setState({
-    resultforeverycollectin: arrfordata,
-  });
-console.log(this.state.resultforeverycollectin.thumbnail)
-  }
+  readcollection = (event) => {
+    event.preventDefault();
+    let arrfordata = [];
+    let collectinselect = event.target.collectin.value;
+    console.log(collectinselect);
+    let results = this.state.collectionData.map((value) => {
+      if (collectinselect == value.collectionOfModels) {
+        arrfordata.push(value);
+      }
+      return value;
+    });
+    this.setState({
+      resultforeverycollectin: arrfordata,
+    });
+    console.log(this.state.resultforeverycollectin.thumbnail);
+  };
 
   render() {
+    
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
-      <>
+      <div className="gene">
         {isAuthenticated ? (
           <>
             <div className="info">
-              <img className="userProfileImg" src={user.picture} alt={user.name} />
-              
+              <img
+                className="userProfileImg"
+                src={user.picture}
+                alt={user.name}
+              />
+
               <h2>{user.name}</h2>
-              
-             
             </div>
 
             <div className="rndrcoll">
@@ -111,37 +117,40 @@ console.log(this.state.resultforeverycollectin.thumbnail)
             <p>Please log in to show data</p>
           </div>
         )}
-        {this.state.collectionnamearr.map(item => {
+        <div className="folders">
+        {this.state.collectionnamearr.map((item) => {
           return (
-         <form onSubmit={this.readcollection} >
-       
-           <input type="image"  src="https://www.computerhope.com/jargon/f/folder.png" alt="Submit"/>
-          {/* < label  value={item}>{item}</label> */}
-          <input type="submit"  value={item}  name='collectin'/>
-  
-          </form>
-
-
-          )
+            <form onSubmit={this.readcollection}>
+              <input
+              
+              width="150px"
+                type="image"
+                src="https://www.iconpacks.net/icons/2/free-folder-icon-1484-thumb.png"
+                alt="Submit"
+              />
+              {/* < label  value={item}>{item}</label> */}
+              <input type="submit"  value={item} name="collectin"/>
+               
+            </form>
+          );
         })}
-
-
-{this.state.resultforeverycollectin.map(item => {
+</div>
+<div className="folder-models">
+<div className="one-model">
+        {this.state.resultforeverycollectin.map((item) => {
           return (
-            <Card style={{ width: "25rem" }}  >
-            <Card.Img variant="top" src={item.thumbnail}/>
-            <Card.Text>
-             {item.title}
-             </Card.Text>
-            {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
+            <Card >
+              <div className="cardImage" style={{backgroundImage: `url(${item.thumbnail})`}}></div>
+              <Card.Text>{item.title}</Card.Text>
+              {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
             </Card>
-
-
-          )
+          );
         })}
-
-
-      </>
+        </div>
+        </div>
+       
+      </div>
+      
     );
   }
 }

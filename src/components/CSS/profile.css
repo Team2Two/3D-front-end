@@ -1,4 +1,8 @@
+
+
+
 .err {
+  padding: 10rem;
   /* border: tomato solid; */
   width: fit-content;
   margin: 3rem auto;
@@ -23,7 +27,7 @@
   /* border: solid tomato; */
   width: 70%;
   margin: 5rem auto;
-  height: 578px;
+  height: fit-content;
 }
 
 .info h2 {
@@ -38,5 +42,50 @@
 .userProfileImg {
   width: 150px;
   border-radius: 75px;
-  box-shadow: 0px 3px 7px lightgray;
+  box-shadow: 0px 3px 7px #00000067;
+}
+
+
+
+.folders {
+width: 70%;
+margin: 0rem auto;
+/* border: solid rgb(31, 29, 29); */
+display: flex;
+justify-content: space-around;
+text-align: center;
+
+}
+
+.folders input[type=submit] {
+
+border: solid tomato;
+
+background-color: transparent;
+border-style: none;
+
+}
+
+
+.one-model {
+  width: 75%;
+  height: 500px;
+  margin: 1.5rem auto;
+  /* border: solid rgb(31, 29, 29); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
+
+}
+
+
+.one-model .card {
+
+  /* border: solid tomato; */
+  width: 17rem;
+  height: 17rem;
+  /* padding: 2rem; */
+  
+
 }

@@ -14,7 +14,7 @@ export class AddCollection extends Component {
       <div>
         <Accordion>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Add</Accordion.Header>
+            <Accordion.Header  onClick={this.props.addCollections}>Add</Accordion.Header>
             <Accordion.Body>
               <div className="acoElm">
               <Form className="form1" onSubmit={this.props.addmodels}>
@@ -42,9 +42,9 @@ export class AddCollection extends Component {
                 <Button variant="primary"  type="submit">
                   Create
                 </Button>
-                <Button variant="primary" onClick={this.props.addCollections} type="submit">
+                {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
                   Save
-                </Button>
+                </Button> */}
               </Form>
               </div>
             </Accordion.Body>
