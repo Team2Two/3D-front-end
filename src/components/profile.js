@@ -5,7 +5,6 @@ import OneCollection from "./oneCollection";
 import "./CSS/profile.css";
 import { Card, Button } from "react-bootstrap/";
 
-
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -81,7 +80,6 @@ class Profile extends Component {
   };
 
   render() {
-    
     const { user, isAuthenticated } = this.props.auth0;
 
     return (
@@ -118,39 +116,39 @@ class Profile extends Component {
           </div>
         )}
         <div className="folders">
-        {this.state.collectionnamearr.map((item) => {
-          return (
-            <form onSubmit={this.readcollection}>
-              <input
-              
-              width="150px"
-                type="image"
-                src="https://www.iconpacks.net/icons/2/free-folder-icon-1484-thumb.png"
-                alt="Submit"
-              />
-              {/* < label  value={item}>{item}</label> */}
-              <input type="submit"  value={item} name="collectin"/>
-               
-            </form>
-          );
-        })}
-</div>
-<div className="folder-models">
-<div className="one-model">
-        {this.state.resultforeverycollectin.map((item) => {
-          return (
-            <Card >
-              <div className="cardImage" style={{backgroundImage: `url(${item.thumbnail})`}}></div>
-              <Card.Text>{item.title}</Card.Text>
-              {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
-            </Card>
-          );
-        })}
+          {this.state.collectionnamearr.map((item) => {
+            return (
+              <form onSubmit={this.readcollection}>
+                <input
+                  width="110px"
+                  type="image"
+                  src="https://www.iconpacks.net/icons/2/free-folder-icon-1484-thumb.png"
+                  alt="Submit"
+                />
+                {/* < label  value={item}>{item}</label> */}
+                <input type="submit" value={item} name="collectin" />
+              </form>
+            );
+          })}
         </div>
+        <hr style={{width: "70%", margin: "0 auto"}}></hr>
+        <div className="folder-models">
+          <div className="one-model">
+            {this.state.resultforeverycollectin.map((item) => {
+              return (
+                <Card>
+                  <div
+                    className="cardImage"
+                    style={{ backgroundImage: `url(${item.thumbnail})` }}
+                  ></div>
+                  <Card.Text>{item.title}</Card.Text>
+                  {/* <Button variant="primary" onClick={()=>{this.props.showData(this.props.title)}} >Show</Button> */}
+                </Card>
+              );
+            })}
+          </div>
         </div>
-       
       </div>
-      
     );
   }
 }

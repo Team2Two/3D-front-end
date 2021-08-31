@@ -126,20 +126,24 @@ export class mainPage extends Component {
     console.log("ffffffffffffffffffffffffffffffffffffffffffffff");
     event.preventDefault();
     const user = this.props.auth0;
-    let modelInfo = {
-      // title: this.state.selectedResult.modelName,
-      // modelUrl: this.state.selectedResult.modelUrl,
+     let modelInfo = {
+      
       email: user.user.email,
-      collectionName: event.target.collectionName.value,
+      collectionName: event.target.NAME.value,
     };
     let modelData = await axios.post(
       `${process.env.REACT_APP_SERVER}/addmodels`,
       modelInfo
     );
 
-    this.setState({
-      addnewwcollecction: modelData.data,
-    });
+
+    // this.setState({
+    //   addnewwcollecction: modelData.data,
+    //   show: false,
+    // });
+
+
+
 
     console.log(this.state.addnewwcollecction);
   };
@@ -162,6 +166,14 @@ export class mainPage extends Component {
     );
 
     
+
+    this.setState({
+    
+      show: false,
+    });
+
+
+
   };
 
   
@@ -216,6 +228,7 @@ export class mainPage extends Component {
               addmodels={this.addmodels}
               collectionnamearr={this.state.collectionnamearr}
               createnewcollection={this.createnewcollection}
+              
             />
           ) : (
             <div className="warn">
