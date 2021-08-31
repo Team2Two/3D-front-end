@@ -130,3 +130,10 @@ iframe {
   font-family: sans-serif;
   text-align: center;
 }
+.accordion-body {
+  height: 170px;
+}
+.form2 {
+  margin-top: 3rem;
+  text-align: center;
+}

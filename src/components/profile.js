@@ -33,18 +33,18 @@ class Profile extends Component {
         email: "",
       });
 
-    let modelInfo = {
-      // title: this.state.selectedResult.modelName,
-      // modelUrl: this.state.selectedResult.modelUrl,
-      email: user.email,
-      // collectionName: event.target.collection.value
+    // let modelInfo = {
+    //   // title: this.state.selectedResult.modelName,
+    //   // modelUrl: this.state.selectedResult.modelUrl,
+    //   email: user.email,
+    //   // collectionName: event.target.collection.value
 
-    }
+    // }
 
     // console.log(event.target.collection.value);
     // console.log(modelInfo);
     // console.log(modelInfo);
-    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${modelInfo.email}`)
+    let collectionData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${this.state.email}`)
     console.log('jhjkjhjh')
     this.setState({
       collectionData: collectionData.data,
@@ -100,8 +100,8 @@ passpram=(item)=>{
 }
 deletemodel = (modelID2,collection) =>{
 
-
-   axios.delete(`${process.env.REACT_APP_SERVER1}/${modelID2}?email=${this.state.email}&collection=${collection}`).then((data)=>{
+  // http://localhost:3001/deletemodels/612e39f5ebe18560634d139e?email=maiada.ibrahim.27@gmail.com&collection=hhhhhhhhhhh
+   axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`).then((data)=>{
  console.log(data);
 
   this.setState({

@@ -50,12 +50,12 @@ export class AddCollection extends Component {
                     
                   </Form.Select>
                   <Button type='submit'>Add</Button>
-                  </Form>
+                  </Form   >
                   {/* <Button type='submit'>Add model</Button> */}
                   
                 </FloatingLabel>
 
-                <Form  onSubmit={this.props.createnewcollection}>
+                <Form  className="form2" onSubmit={this.props.createnewcollection}>
                   <Form.Control
                     type="text"
                     name="collectionName"
