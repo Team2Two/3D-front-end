@@ -9,15 +9,15 @@ export class AddCollection extends Component {
       <div>
         <Accordion>
           <Accordion.Item eventKey="0">
-            <Accordion.Header onClick={this.props.addCollections}>
-              Add
+            <Accordion.Header  onClick={this.props.addCollections}>
+             <span className="omg" style={{fontSize: "1.5pc", }}> Add</span>
             </Accordion.Header>
             <Accordion.Body>
               <div className="acoElm">
                 <Form className="form1" onSubmit={this.props.addmodels}>
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Choose a Collection"
+                    label="Choose a Collection from your profile"
                     className="mb-3"
                   >
                     <Form.Select
@@ -32,13 +32,13 @@ export class AddCollection extends Component {
                   </FloatingLabel>
                   <Button type="submit">Add</Button>
                 </Form>
-
+                <p style={{width: "20rem", position: "absolute", left: "25rem", top: "2rem"}}>Or you can create a new collection</p>
                 <Form
                   className="form3"
                   onSubmit={this.props.createnewcollection}
                   
                 >
-                  
+                 
                   
                   <Form.Control
                     type="text"
@@ -49,10 +49,6 @@ export class AddCollection extends Component {
                   <Button variant="primary"  type="submit">
                     Create
                   </Button>
-
-                  {/* <Button variant="primary" onClick={this.props.addCollections} type="submit">
-                  Save
-                </Button> */}
                 </Form>
               </div>
             </Accordion.Body>

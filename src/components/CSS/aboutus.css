@@ -1,73 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Teko:wght@600&display=swap');
 
 .general {
-
-width: 100%;
-height: 100%;
-background-color: white;
-/* padding-bottom: 2rem; */
-/* position: absolute; */
-box-shadow: 0px 10rem 0px white;
-
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  /* padding-bottom: 2rem; */
+  /* position: absolute; */
+  box-shadow: 0px 10rem 0px white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
 }
 
+
+
 .container {
-    display: flex;
-    width: 100%;
-    padding: 4% 2%;
-    box-sizing: border-box;
-    height: 100vh;
-  }
-  .box {
-    flex: 1;
-    overflow: hidden;
-    transition: .5s;
-    margin: 0 2%;
-    box-shadow: 0 20px 30px rgba(0,0,0,.1);
-    line-height: 0;
-  }
-  .box > img {
-    width: 150%;
-    height: calc(70% - 10vh);
-    object-fit: cover; 
-    transition: .5s;
-  }
-  .box > span {
-    font-size: 3.8vh;
-    display: block;
-    text-align: center;
-    height: 10vh;
-    line-height: 2.6;
-  }
-  .box:hover { flex: 1 1 50%; }
-  .box:hover > img {
-    width:100%;
-    height: 80%;
-  }
-  .pa {
-    font-size: 1.8pc;
-    display: block;
-    text-align: center;
-    height: 10vh;
-    line-height: 2.6;
-    margin-top: 1rem;
-    color: tomato;
-  }
+  display: flex;
+  width: 100%;
+  padding: 4% 2%;
+  box-sizing: border-box;
+  height: 100vh;
+}
+.box {
+  flex: 1;
+  overflow: hidden;
+  transition: 0.5s;
+  margin: 0 2%;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  line-height: 0;
+}
+.box > img {
+  width: 150%;
+  height: calc(70% - 10vh);
+  object-fit: cover;
+  transition: 0.5s;
+}
+.box > span {
+  font-size: 3.8vh;
+  display: block;
+  text-align: center;
+  height: 10vh;
+  line-height: 2.6;
+}
+.box:hover {
+  flex: 1 1 50%;
+}
+.box:hover > img {
+  width: 100%;
+  height: 80%;
+}
+.pa {
+  font-size: 1.8pc;
+  display: block;
+  text-align: center;
+  height: 10vh;
+  line-height: 2.6;
+  margin-top: 1rem;
+  color: tomato;
+}
 
 .idk {
-width: 70%;
+  width: 70%;
   /* border: solid tomato; */
-  margin:0 auto;
+  margin: 0 auto;
   padding-top: 5rem;
   text-align: center;
   font-size: 2pc;
   /* font-family: sans-serif; */
 }
 
+.brie {
+  /* border: solid tomato; */
+}
 
-  .brie {
 
 
-
-/* border: solid tomato; */
-
-  }
+.poster{
+  text-align: center;
+  background-size: cover;
+  /* border: solid tomato; */
+  height:300px;
+ background-image: url(https://www.wallpaperflare.com/static/991/790/463/digital-art-abstract-cube-lines-wallpaper.jpg);
+  width: 100%;
+}
+.poster h2 {
+ padding-top: 5rem;
+ font-weight: bolder;
+ font-size: 7pc;
+ color: white;
+ text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.349);
+}

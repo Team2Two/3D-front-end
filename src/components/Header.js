@@ -44,8 +44,9 @@ class Header extends React.Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
+              
               <Link
-                className="hvrEfct"
+                className="link"
                 style={{
                   textDecoration: "none",
                   color: "white",
@@ -56,7 +57,35 @@ class Header extends React.Component {
                 Home
               </Link>
 
-              <NavDropdown title="Menu" id="collasible-nav-dropdown"   renderMenuOnMount={true}>
+              
+              <Link
+                className="link"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  marginTop: "0.5rem",
+                }}
+                to="/profile"
+              >
+                Profile
+              </Link>
+
+
+              <Link
+                className="link"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  marginTop: "0.5rem",
+                }}
+                to="/aboutus"
+              >
+                About us
+              </Link>
+
+
+
+              {/* <NavDropdown title="Menu" id="collasible-nav-dropdown"   renderMenuOnMount={true}>
                 <Link
                   className="hvrEfct"
                   style={{
@@ -80,7 +109,7 @@ class Header extends React.Component {
                 >
                   About Us
                 </Link>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
           </Navbar.Collapse>
 

@@ -214,7 +214,7 @@ export class mainPage extends Component {
           show={this.state.show}
           onHide={this.handleClose}
         >
-          <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
+          <Modal.Title ><span className="titleyee">{this.state.selectedResult.modelName}</span></Modal.Title>
 
           <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
 
@@ -232,9 +232,7 @@ export class mainPage extends Component {
               </span>
             </div>
           )}
-          <Button className="close" variant="danger" onClick={this.handleClose}>
-            Close
-          </Button>
+         
         </Modal>
       </div>
     );

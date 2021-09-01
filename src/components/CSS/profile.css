@@ -27,20 +27,34 @@
   font-size: 1.5pc;
 }
 
+.info-cont {
+  /* border: solid tomato; */
+  width: 100%;
+  background-size: cover;
+
+  height:300px;
+ background-image: url(https://www.wallpaperflare.com/static/991/790/463/digital-art-abstract-cube-lines-wallpaper.jpg);
+
+}
+
+
 .info {
   /* border: solid tomato; */
   width: 70%;
-  margin: 5rem auto;
+  padding: 5rem;
   height: fit-content;
+  margin: 0 auto
 }
 
 .info h2 {
   /* border: solid tomato; */
   display: inline;
   font-family: sans-serif;
-  color: hsla(0, 0%, 0%, 0.548);
+  color: white;
   margin-left: 2rem;
-  font-size: 1.8pc;
+  font-size: 2.5pc;
+  font-weight: bolder;
+  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.349);
 }
 
 .userProfileImg {
@@ -50,10 +64,10 @@
 }
 
 .folders {
-  padding: 0.7rem;
+  padding-left: 1rem;
   border-radius: 10px;
   box-shadow: 0px 4px 6px hsla(0, 0%, 0%, 0.219);
-  width: 70%;
+  width: 50%;
   margin: 0rem auto;
   /* border: solid rgb(31, 29, 29); */
   display: flex;
@@ -97,13 +111,14 @@
   height: 550px;
   overflow: auto;
   margin: 1.5rem auto;
-  /* border: solid rgb(31, 29, 29); */
+  
   display: flex;
   flex-direction: row;
   /* justify-content: space-around; */
   text-align: center;
   flex-wrap: wrap;
   padding: 2rem 0rem;
+border-left: black solid 0.1px ;
 }
 
 .one-model .card {
@@ -115,6 +130,7 @@
 cursor: pointer;
   background-color: transparent;
   transition: 0.2s;
+  font-size: 1.3pc;
 }
 
 .one-model .card:hover {
@@ -126,6 +142,14 @@ cursor: pointer;
   transform: scale(99%);
 }
 
+
+.card-text{
+
+/* border: solid tomato; */
+height: 2rem;
+behavior: scroll;
+direction: right;
+}
 
 .one-model .card button {
   width: 5rem;
@@ -173,13 +197,14 @@ iframe {
 }
 
 .form2 {
-  /* position: absolute; */
+  position: absolute;
   /* border: solid blue; */
   /* float: left; */
   /* width: 100%; */
-  margin: 0 auto;
+  
   /* display: flex; */
-
+right: 9.5rem;
+top: 3rem;
   padding: 0;
 }
 
