@@ -26,7 +26,7 @@ class Aboutus extends Component {
   </div>
   <div className="box">
     <img src="https://ca.slack-edge.com/TNGRRLUMA-U01P6FYJH2T-56c3658bd276-512"alt=""/>
-    <span>Mansour Albatran</span>
+    <span>Mansour Albatran<br></br> Civil Engineering</span>
   </div>
 </div>
 </div>
