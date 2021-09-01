@@ -57,12 +57,12 @@ class Profile extends Component {
     let results = this.state.collectionData.map((result) => {
       if (!nameofcolectiom.includes(result.collectionOfModels)) {
         nameofcolectiom.push(result.collectionOfModels);
-      } else {                                                         //// here 
+      } else {
+        //// here
 
         this.setState({
           msg: "Empty",
         });
-
       }
       return nameofcolectiom;
     });
@@ -88,56 +88,98 @@ class Profile extends Component {
     });
     console.log(this.state.resultforeverycollectin.thumbnail);
   };
-  readcollection = (event) => {
+
+
+
+  readcollection = async (event) => {
+    console.log('hello');
     event.preventDefault();
     let arrfordata = [];
+    let arrfordata2 = [{ title: "" }]
     let collectinselect = event.target.collectin.value;
+    let modelData = await axios.get(`${process.env.REACT_APP_SERVER1}/getcollection?email=${this.state.email}`);
+    await this.setState({
+      collectionData:modelData.data
+    })
     console.log(collectinselect);
     let results = this.state.collectionData.map((value) => {
       if (collectinselect == value.collectionOfModels) {
         arrfordata.push(value);
       }
-      return arrfordata;
+      return value;
     });
-    this.setState({
-      resultforeverycollectin: arrfordata,
-    });
-    console.log(results);
     console.log(arrfordata);
-  };
+    console.log(this.state.collectionData);
+    await this.setState({
+      resultforeverycollectin: arrfordata,
+    })
+  }
 
-  handleshow = () => {
-    this.setState({
-      show: true,
-    });
-  };
-  handleClose = () => {
-    this.setState({
-      show: false,
-    });
-  };
-  passpram = (item) => {
-    this.setState({
-      passpramstate: item,
-    });
-    this.handleshow();
 
-    console.log(this.state.passpramstate);
-  };
-  deletemodel = (modelID2, collection) => {
-    // http://localhost:3001/deletemodels/612e39f5ebe18560634d139e?email=maiada.ibrahim.27@gmail.com&collection=hhhhhhhhhhh
-    axios
-      .delete(
-        `${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`
-      )
-      .then((data) => {
-        console.log(data);
 
-        this.setState({
-          resultforeverycollectin: data.data,
-        });
-      });
-  };
+  // readcollection = (event) => {
+  //   event.preventDefault();
+  //   let arrfordata = [];
+  //   let collectinselect = event.target.collectin.value;
+  //   console.log(collectinselect);
+  //   let results = this.state.collectionData.map((value) => {
+  //     if (collectinselect == value.collectionOfModels) {
+  //       arrfordata.push(value);
+  //     }
+  //     return arrfordata;
+  //   });
+  //   this.setState({
+  //     resultforeverycollectin: arrfordata,
+  //   });
+  //   console.log(results);
+  //   console.log(arrfordata);
+  // };
+
+  // handleshow = () => {
+  //   this.setState({
+  //     show: true,
+  //   });
+  // };
+  // handleClose = () => {
+  //   this.setState({
+  //     show: false,
+  //   });
+  // };
+  // passpram = (item) => {
+  //   this.setState({
+  //     passpramstate: item,
+  //   });
+  //   this.handleshow();
+
+  //   console.log(this.state.passpramstate);
+  // };
+  // deletemodel = (modelID2, collection) => {
+  //   // http://localhost:3001/deletemodels/612e39f5ebe18560634d139e?email=maiada.ibrahim.27@gmail.com&collection=hhhhhhhhhhh
+  //   axios
+  //     .delete(
+  //       `${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`
+  //     )
+  //     .then((data) => {
+  //       console.log(data);
+
+  //       this.setState({
+  //         resultforeverycollectin: data.data,
+  //       });
+  //     });
+  // };
+
+
+  deletemodel = async (modelID2, collection) => {
+    axios.delete(`${process.env.REACT_APP_SERVER1}/deletemodels/${modelID2}?email=${this.state.email}&collection=${collection}`).then((data) => {
+      console.log(data);
+    });
+    let modelData = await axios.get(`${process.env.REACT_APP_SERVER1}/usercollection?email=${this.state.email}&collection=${collection}`);
+    this.setState({
+      resultforeverycollectin: modelData.data
+    })
+  }
+
+
 
   createnewcollection = async (event) => {
     console.log("ffffffffffffffffffffffffffffffffffffffffffffff");
@@ -188,6 +230,26 @@ class Profile extends Component {
 
   // }
 
+  ///////////////////////////////////////////////////////////////////////////
+  deletecollection = async (collection) => {
+    console.log("hi");
+    let deletedcollection = await axios.delete(
+      `${process.env.REACT_APP_SERVER1}/deletecollections/${collection}?email=${this.state.email}`
+    );
+    console.log("hello");
+    console.log(deletedcollection.data);
+    let nameofcolectiom = [];
+    let results = deletedcollection.data.map((result) => {
+      if (!nameofcolectiom.includes(result.collectionOfModels)) {
+        nameofcolectiom.push(result.collectionOfModels);
+      }
+      return nameofcolectiom;
+    });
+    this.setState({
+      collectionnamearr: nameofcolectiom,
+    });
+  };
+
   render() {
     const { user, isAuthenticated } = this.props.auth0;
 
@@ -204,13 +266,14 @@ class Profile extends Component {
 
               <h2>{user.name}</h2>
             </div>
- <hr style={{ width: "70%", margin: "2rem auto" }}></hr>
+            <hr style={{ width: "70%", margin: "2rem auto" }}></hr>
             <div className="form-container">
               <Form className="form2" onSubmit={this.createnewcollection}>
                 <Form.Control
                   type="text"
                   name="collectionName"
                   placeholder="Create new collection"
+                  required
                 />
                 <Button variant="primary" type="submit">
                   Create
@@ -230,20 +293,28 @@ class Profile extends Component {
                       src="https://www.iconpacks.net/icons/2/free-folder-icon-1484-thumb.png"
                       alt="Submit"
                     />
-                    {/* < label  value={item}>{item}</label> */}
+                    {/* <Button className="circlestuff" variant="danger" onClick={()=>{this.deletecollection(`${item}`)}} >X</Button> */}
+                    <img
+                      className="circlestuff"
+                      onClick={() => {
+                        this.deletecollection(`${item}`);
+                      }}
+                      src="https://img.icons8.com/flat-round/452/delete-sign.png"
+                      alt="delete"
+                    ></img>
                     <input type="submit" value={item} name="collectin" />
                   </form>
                 );
               })}
             </div>
-           
 
             <div className="folder-models">
               <div className="one-model">
-                {this.state.resultforeverycollectin.map((item) => {
-                  if (!item.title == "") {
-                    return (
-                      <Card>
+                {/* {this.state.resultforeverycollectin.map((item) => { */}
+                {this.state.resultforeverycollectin.length !== 1 ? this.state.resultforeverycollectin.map(item => {
+          if (!item.title == "") {
+            return (
+              <Card>
                         <div
                           onClick={() => {
                             this.passpram(item);
@@ -256,19 +327,27 @@ class Profile extends Component {
                       variant="top"
                       src={item.thumbnail}
                     /> */}
-                        <Card.Text>{item.title}</Card.Text>
-                        <Button
+                        <Card.Text style={{marginTop: "1rem"}}>{item.title}</Card.Text>
+
+                        <img
+                          className="circlestuff2"
+                          onClick={() => {
+                            this.deletemodel(item._id, item.collectionOfModels);
+                          }}
+                          src="https://img.icons8.com/flat-round/452/delete-sign.png"
+                          alt="delete"
+                        ></img>
+                        {/* <Button
                           variant="danger"
                           onClick={() => {
                             this.deletemodel(item._id, item.collectionOfModels);
                           }}
                         >
                           Delete
-                        </Button>
-                      </Card>
-                    );
-                  }
-                })}
+                        </Button> */}
+                      </Card>)
+          }
+        }) : <p>this folder is empty</p>}
               </div>
             </div>
 

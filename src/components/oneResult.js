@@ -10,7 +10,7 @@ class OneResult extends React.Component {
         <Card style={{ width: "22rem" }}  >
         <div className="cardImage" style={{backgroundImage: `url(${this.props.Thumbnail})`}}></div>
           {/* <Card.Img variant="top" src={this.props.Thumbnail}/> */}
-          <Card.Text>
+          <Card.Text style={{marginTop: "1rem"}}>
       {this.props.title}
     </Card.Text>
     <Button variant="primary" className="showBtn" onClick={()=>{this.props.showData(this.props.title)}} >Render</Button>

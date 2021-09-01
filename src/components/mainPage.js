@@ -42,20 +42,18 @@ export class mainPage extends Component {
   getData = async (e) => {
     e.preventDefault();
 
-
     await this.setState({
       searchInput: e.target.search.value,
     });
-    
+
     let requestURL = `${process.env.REACT_APP_SERVER1}/models?title=${this.state.searchInput}`;
 
     let retrivedURL = await axios.get(requestURL);
-    
+
     this.setState({
       searchResults: retrivedURL.data,
       showData: true,
     });
-    
   };
   /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,9 +63,7 @@ export class mainPage extends Component {
       if (result.modelName === title) {
         return result;
       }
-      
     });
-    
 
     await this.setState({
       selectedResult: results,
@@ -89,15 +85,11 @@ export class mainPage extends Component {
     event.preventDefault();
 
     const user = this.props.auth0;
-    
 
     let modelInfo = {
-      
       email: user.user.email,
-      
     };
 
-   
     let collectionData = await axios.get(
       `${process.env.REACT_APP_SERVER1}/getcollection?email=${modelInfo.email}`
     );
@@ -114,11 +106,10 @@ export class mainPage extends Component {
       return nameofcolectiom;
     });
     this.setState({
-      collectionnamearr: nameofcolectiom   // nameofcolectiom  (I changed this)
+      collectionnamearr: nameofcolectiom, // nameofcolectiom  (I changed this)
     });
     // console.dir(results);
     // console.log(this.state.collectionnamearr); (I commented this)
-
   };
 
   //-------------------------------------------------------------------------------------------------
@@ -127,40 +118,40 @@ export class mainPage extends Component {
     event.preventDefault();
     const user = this.props.auth0;
     let modelInfo = {
-      title:"",
+      title: "",
       // modelUrl: this.state.selectedResult.modelUrl,
       email: user.user.email,
       collectionName: event.target.NAME.value,
       // thumbnail:this.state.selectedResult.thumbnail
-
-    }
+    };
     let modelInfo2 = {
       title: this.state.selectedResult.modelName,
       modelUrl: this.state.selectedResult.modelUrl,
       email: user.user.email,
       collectionName: event.target.NAME.value,
-      thumbnail:this.state.selectedResult.thumbnail
-
-    }
-    let modelData = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo);
+      thumbnail: this.state.selectedResult.thumbnail,
+    };
+    let modelData = await axios.post(
+      `${process.env.REACT_APP_SERVER1}/addmodels`,
+      modelInfo
+    );
 
     // this.setState({
     //   addnewwcollecction: modelData.data,
     //   show: false,
     // });
 
-    let modelData2 = await axios.post(`${process.env.REACT_APP_SERVER1}/addmodels`, modelInfo2);
-    
-   
+    let modelData2 = await axios.post(
+      `${process.env.REACT_APP_SERVER1}/addmodels`,
+      modelInfo2
+    );
+
     this.setState({
-    
       show: false,
     });
+  };
+  //------------------------------------------------------------------------------------------------------
 
-
-  }
-    //------------------------------------------------------------------------------------------------------
-    
   addmodels = async (event) => {
     console.log("ggggggggggggggggggggggggg");
     event.preventDefault();
@@ -178,18 +169,11 @@ export class mainPage extends Component {
       modelInfo
     );
 
-    
-
     this.setState({
-    
       show: false,
     });
-
-
-
   };
 
-  
   render() {
     // console.log(this.state.searchResults);
     const { user, isAuthenticated } = this.props.auth0;
@@ -221,7 +205,6 @@ export class mainPage extends Component {
                   Thumbnail={item.thumbnail}
                   title={item.modelName}
                   showData={this.showModal}
-                 
                 />
               );
             })}
@@ -234,21 +217,19 @@ export class mainPage extends Component {
           <Modal.Title>{this.state.selectedResult.modelName}</Modal.Title>
 
           <iframe src={this.state.selectedResult.modelUrl} title="lol"></iframe>
-         
+
           {isAuthenticated ? (
             <AddCollection
               addCollections={this.addcollectiontoselect}
               addmodels={this.addmodels}
               collectionnamearr={this.state.collectionnamearr}
               createnewcollection={this.createnewcollection}
-              
             />
           ) : (
             <div className="warn">
               <span>
                 Login to save Models <LoginButton />
               </span>
-              
             </div>
           )}
           <Button className="close" variant="danger" onClick={this.handleClose}>

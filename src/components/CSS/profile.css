@@ -1,14 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap");
 
 .gene {
-
-
   background-color: white;
-  box-shadow: 0px 10rem  0px   white,
-  0px -10rem  0px   white
-  ;
+  box-shadow: 0px 10rem 0px white, 0px -10rem 0px white;
 }
-
 
 .err {
   padding: 6rem;
@@ -55,7 +50,7 @@
 }
 
 .folders {
-padding: 0.7rem ;
+  padding: 0.7rem;
   border-radius: 10px;
   box-shadow: 0px 4px 6px hsla(0, 0%, 0%, 0.219);
   width: 70%;
@@ -65,22 +60,36 @@ padding: 0.7rem ;
   /* justify-content: space-around; */
   text-align: center;
   flex-wrap: wrap;
-  font-family: 'Fira Sans', sans-serif;
+  font-family:  sans-serif;
+  font-weight: bolder;
+  
 }
 
 .folders form {
   border: solid #ffffff;
-
+  position: relative;
   display: flex;
   flex-direction: column;
+  transition: 0.2s;
 }
+
+.folders form:hover {
+
+  transform: scale(102%);
+}
+
+
+.folders form:active {
+
+  transform: scale(99%);
+}
+
 
 .folders input[type="submit"] {
   /* border: solid tomato; */
 
   background-color: transparent;
   border-style: none;
-  
 }
 
 .one-model {
@@ -103,17 +112,25 @@ padding: 0.7rem ;
   width: 15rem;
   height: 15rem;
   /* padding: 2rem; */
- 
+cursor: pointer;
   background-color: transparent;
+  transition: 0.2s;
 }
+
+.one-model .card:hover {
+  transform: scale(102%);
+}
+
+.one-model .card:active {
+
+  transform: scale(99%);
+}
+
 
 .one-model .card button {
-
-width: 5rem;
-margin: 0 auto;
-
+  width: 5rem;
+  margin: 0 auto;
 }
-
 
 iframe {
   padding: 1rem;
@@ -126,7 +143,7 @@ iframe {
   width: 80vw;
   height: fit-content;
   max-width: 80vw;
-/* padding-bottom: 1rem; */
+  /* padding-bottom: 1rem; */
   /* border: solid tomato; */
 }
 
@@ -142,41 +159,36 @@ iframe {
 }
 
 .my-modal button {
-
-/* border: solid blue; */
-width: 5rem;
-margin: 0 auto;
-
+  /* border: solid blue; */
+  width: 5rem;
+  margin: 0 auto;
 }
 
-
-
-
-.form-container{
+.form-container {
   margin: 0 auto;
-width: 70%;
-/* border: solid green; */
-height: 7rem;
-position: relative;
+  width: 70%;
+  /* border: solid green; */
+  height: 7rem;
+  position: relative;
 }
 
 .form2 {
-/* position: absolute; */
-/* border: solid blue; */
-/* float: left; */
-/* width: 100%; */
-margin: 0 auto;
-/* display: flex; */
+  /* position: absolute; */
+  /* border: solid blue; */
+  /* float: left; */
+  /* width: 100%; */
+  margin: 0 auto;
+  /* display: flex; */
 
-padding: 0;
+  padding: 0;
 }
 
 .form2 input {
-height: 3rem;
-width: 15rem;
-position: absolute;
-right: 7rem;
-box-shadow: 0px 2px 5px #0000004d;
+  height: 3rem;
+  width: 15rem;
+  position: absolute;
+  right: 7rem;
+  box-shadow: 0px 2px 5px #0000004d;
 }
 
 .form2 button {
@@ -186,19 +198,55 @@ box-shadow: 0px 2px 5px #0000004d;
   right: 0rem;
   top: 0.1px;
   box-shadow: 0px 2px 5px #0000004d;
-  }
-
+}
 
 .form2 input:focus {
   height: 3rem;
   width: 15rem;
   background-color: white;
   box-shadow: 0px 2px 5px #0000004d;
-  }
+}
 
-  .form2 input:active {
-    height: 3rem;
-    width: 15rem;
-    background-color: white;
-    box-shadow: 0px 2px 5px #0000004d;
-    }
+.form2 input:active {
+  height: 3rem;
+  width: 15rem;
+  background-color: white;
+  box-shadow: 0px 2px 5px #0000004d;
+}
+
+.test {
+  font-size: 5pc;
+}
+
+.circlestuff {
+  position: absolute;
+  /* font-size: 1pc; */
+  /* right: 0; */
+  /* width: 10px; */
+  width: 30px;
+  left: -1rem;
+  top: 0.5rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.circlestuff:hover {
+  transform: scale(115%);
+}
+
+
+.circlestuff2 {
+  position: absolute;
+  /* font-size: 1pc; */
+  /* right: 0; */
+  /* width: 10px; */
+  width: 30px;
+  left: -1rem;
+  top: 0.5rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.circlestuff2:hover {
+  transform: scale(115%);
+}

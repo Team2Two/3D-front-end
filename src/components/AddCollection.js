@@ -44,6 +44,7 @@ export class AddCollection extends Component {
                     type="text"
                     name="NAME"
                     placeholder="Create a new collection"
+                    required
                   />
                   <Button variant="primary"  type="submit">
                     Create
