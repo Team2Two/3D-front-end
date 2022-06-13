@@ -249,6 +249,8 @@ export class mainPage extends Component {
             Close
           </Button>
         </Modal>
+        
+
       </div>
     );
   }
